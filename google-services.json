@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "380208375908",
+    "firebase_url": "https://notuber-4f960.firebaseio.com",
+    "project_id": "notuber-4f960",
+    "storage_bucket": "notuber-4f960.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380208375908:android:ca50d31172a68ff6ac9771",
+        "android_client_info": {
+          "package_name": "edu.uga.cs.notuber"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380208375908-1n2kuha2fiec2qopbf2f8oiflpre4puk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.uga.cs.notuber",
+            "certificate_hash": "b2b3822fe029d28006ca3c5cb83f4570168a8bc4"
+          }
+        },
+        {
+          "client_id": "380208375908-upnrv1b2ejkiurcsosk2s14n3b7t3b7a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDk2zHVGXO8Nazmk3vKQgIILdeTlE-V9z0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380208375908-upnrv1b2ejkiurcsosk2s14n3b7t3b7a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
