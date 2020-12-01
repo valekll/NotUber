@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
      * @return the new user
      */
     private FirebaseUser getNewUser() {
-        FirebaseUser newUser;
+        FirebaseUser newUser = null;
         return newUser;
     } //getNewUser()
 
