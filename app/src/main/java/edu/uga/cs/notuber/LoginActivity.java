@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         myAuth = FirebaseAuth.getInstance();
 
         //init ui elements
-        usernameBox = (EditText)findViewById(R.id.userNameBox);
+        usernameBox = (EditText)findViewById(R.id.emailBox);
         passwordBox = (EditText)findViewById(R.id.passwordBox);
 
         loginButton = (Button)findViewById(R.id.loginButton);
