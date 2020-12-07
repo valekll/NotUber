@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/testTextView"
-        android:layout_width="145dp"
-        android:layout_height="16dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

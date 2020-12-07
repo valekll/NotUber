@@ -130,7 +130,7 @@ public class SignUpActivity extends AppCompatActivity {
      * @param checkSignUpRequirements makes sure form's requirements are met
      */
     private void signUp(boolean checkSignUpRequirements) {
-        if(checkSignUpRequirements) {
+        //if(checkSignUpRequirements) {
             myAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -139,16 +139,16 @@ public class SignUpActivity extends AppCompatActivity {
                                 Log.d("Turtle", "Sign up attempt: success");
                                 currUser = myAuth.getCurrentUser();
                                 NotUberUser myUser = new NotUberUser(email, currUser.getUid(),
-                                        username, firstName, lastName, phoneNum, dob);
+                                        username, firstName, lastName, phoneNum, dob[1], dob[0], dob[2]);
                                 myDb = FirebaseDatabase.getInstance().getReference();
                                 myDb.child("users").child(currUser.getUid()).setValue(myUser);
                             } //if
                             else {
-                                Log.d("Turtle", "Sign in attempt: fail");
+                                Log.d("Turtle", "Sign up attempt: fail");
                             } //else
                         } //onComplete()
                     });
-        } //if
+        //} //if
     } //signUp()
 
     /**
@@ -250,9 +250,9 @@ public class SignUpActivity extends AppCompatActivity {
         lastName = lastNameTextView.getText().toString();
         email = emailTextView.getText().toString();
         phoneNum = phoneTextView.getText().toString();
-        if(!(username.equals("") && password.equals("") && confirmPass.equals("") &&
-                firstName.equals("") && lastName.equals("") &&
-                email.equals("") && phoneNum.equals(""))) {
+        if(username.equals("") || password.equals("") || confirmPass.equals("") ||
+                firstName.equals("") || lastName.equals("") ||
+                email.equals("") || phoneNum.equals("")) {
             //make toast
             Toast myMessage = Toast.makeText(SignUpActivity.this,
                     "Please finish filling out the form.", Toast.LENGTH_SHORT);

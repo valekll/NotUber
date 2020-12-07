@@ -2,6 +2,8 @@ package edu.uga.cs.notuber;
 
 import android.os.Build;
 
+import java.util.Arrays;
+
 /**
  * A class for users of the app.
  */
@@ -12,7 +14,9 @@ public class NotUberUser {
     public String first;
     public String last;
     public String phoneNumber;
-    public int[] dob;
+    public int day;
+    public int month;
+    public int year;
 
     //constructor
     public NotUberUser() {
@@ -31,14 +35,16 @@ public class NotUberUser {
 
     //constructor
     public NotUberUser(String email, String uid, String username,
-                       String first, String last, String phoneNumber, int[] dob) {
+                       String first, String last, String phoneNumber, int day, int month, int year) {
         this.email = email;
         this.uid = uid;
         this.username = username;
         this.first = first;
         this.last = last;
         this.phoneNumber = phoneNumber;
-        this.dob = dob;
+        this.day = day;
+        this.month = month;
+        this.year = year;
     }
 
     //getter for username
@@ -91,21 +97,34 @@ public class NotUberUser {
         this.last = last;
     }
 
-    //getter for date of birth
-    public int[] getDob() {
-        return dob;
+    //getter day
+    public int getDay() {
+        return day;
     }
 
-    /**
-     * Sets the user's date of birth
-     * @param dob the date of birth
-     * @throws NumberFormatException if the dob variable isn't in proper date format
-     */
-    public void setDob(int[] dob) throws NumberFormatException {
-        if(dob.length != 3) {
-            throw new NumberFormatException("Not in date time format.");
-        }
-        this.dob = dob;
+    //setter day
+    public void setDay(int day) {
+        this.day = day;
+    }
+
+    //getter month
+    public int getMonth() {
+        return month;
+    }
+
+    //setter month
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    //getter year
+    public int getYear() {
+        return year;
+    }
+
+    //setter year
+    public void setYear(int year) {
+        this.year = year;
     }
 
     //getter for phone number
@@ -118,6 +137,19 @@ public class NotUberUser {
         this.phoneNumber = phoneNumber;
     }
 
-
-
+    //toString method
+    @Override
+    public String toString() {
+        return "NotUberUser{" +
+                "username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", uid='" + uid + '\'' +
+                ", first='" + first + '\'' +
+                ", last='" + last + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", day=" + day +
+                ", month=" + month +
+                ", year=" + year +
+                '}';
+    }
 } //NotUberUser
