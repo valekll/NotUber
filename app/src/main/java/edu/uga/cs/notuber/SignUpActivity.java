@@ -11,10 +11,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.Calendar;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -24,6 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView lastNameTextView;
     private TextView emailTextView;
     private TextView passwordTextView;
+    private TextView confirmPasswordTextView;
     private TextView phoneTextView;
     private TextView usernameTextView;
     private TextView mDisplayDate;
@@ -33,6 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
     private String email;
     private String username;
     private String password;
+    private String confirmPass;
     private String firstName;
     private String lastName;
     private String phoneNum;
@@ -64,6 +69,7 @@ public class SignUpActivity extends AppCompatActivity {
         passwordTextView = (TextView)findViewById(R.id.password);
         if(password == null || !password.equals(""))
             passwordTextView.setText(password);
+        confirmPasswordTextView = (TextView)findViewById(R.id.confirmPassword);
         phoneTextView = (TextView)findViewById(R.id.phoneNumber);
 
         //init date of birth box
@@ -99,4 +105,112 @@ public class SignUpActivity extends AppCompatActivity {
         submitButton = (Button)findViewById(R.id.submitButton);
 
     } //onCreate()
+
+    /**
+     * Checks to make sure sign up requirements are made.
+     * TODO: Checks for fields for user account creation
+     */
+    private boolean checkSignUpRequirements() {
+        if(checkEmptyFields()) {
+            if (checkUsername()) {
+                if (checkPassword()) {
+                    return true;
+                } //if
+            } //if
+        }//if
+        return false;
+    } //checkSignUpRequirements
+
+    /**
+     * Checks for password compliance
+     * @return whether it checks out or not
+     */
+    private boolean checkPassword() {
+        password = passwordTextView.getText().toString();
+        if(!password.equals(confirmPasswordTextView.getText().toString())) {
+            //make toast
+            Toast myMessage = Toast.makeText(SignUpActivity.this,
+                    "Passwords do not match.", Toast.LENGTH_SHORT);
+            //set toast colors to be more visible
+            View messageView = myMessage.getView();
+            messageView.setBackgroundColor(Color.GRAY);
+            TextView messageTextView = (TextView)myMessage.getView()
+                    .findViewById(android.R.id.message);
+            messageTextView.setTextColor(Color.WHITE);
+            myMessage.show();
+            return false;
+        } //if
+        return true;
+    } //checkPassword
+
+    /**
+     * Checks for username compliance
+     * @return whether it checks out or not
+     */
+    private boolean checkUsername() {
+        username = usernameTextView.getText().toString();
+        if(username.length() < 5) {
+            //make toast
+            Toast myMessage = Toast.makeText(SignUpActivity.this,
+                    "Username must be 5 or more characters long.", Toast.LENGTH_SHORT);
+            //set toast colors to be more visible
+            View messageView = myMessage.getView();
+            messageView.setBackgroundColor(Color.GRAY);
+            TextView messageTextView = (TextView)myMessage.getView()
+                    .findViewById(android.R.id.message);
+            messageTextView.setTextColor(Color.WHITE);
+            myMessage.show();
+            return false;
+        } //if
+        else {
+            //check for non alphaNumerics
+            Pattern nonAlphaNumeric = Pattern.compile("[^a-z0-9 ]", Pattern.CASE_INSENSITIVE);
+            Matcher myMatcher = nonAlphaNumeric.matcher(username);
+            if(myMatcher.find()) {
+                //make toast
+                Toast myMessage = Toast.makeText(SignUpActivity.this,
+                        "Username must only contain letters and numbers.", Toast.LENGTH_SHORT);
+                //set toast colors to be more visible
+                View messageView = myMessage.getView();
+                messageView.setBackgroundColor(Color.GRAY);
+                TextView messageTextView = (TextView)myMessage.getView()
+                        .findViewById(android.R.id.message);
+                messageTextView.setTextColor(Color.WHITE);
+                myMessage.show();
+                return false;
+            }
+        }
+        return true;
+    } //checkUsername()
+
+    /**
+     * Checks for empty fields compliance
+     * @return whether it checks out or not
+     */
+    private boolean checkEmptyFields() {
+        username = usernameTextView.getText().toString();
+        password = passwordTextView.getText().toString();
+        confirmPass = confirmPasswordTextView.getText().toString();
+        firstName = firstNameTextView.getText().toString();
+        lastName = lastNameTextView.getText().toString();
+        email = emailTextView.getText().toString();
+        phoneNum = phoneTextView.getText().toString();
+        if(!(username.equals("") && password.equals("") && confirmPass.equals("") &&
+                firstName.equals("") && lastName.equals("") &&
+                email.equals("") && phoneNum.equals(""))) {
+            //make toast
+            Toast myMessage = Toast.makeText(SignUpActivity.this,
+                    "Please finish filling out the form.", Toast.LENGTH_SHORT);
+            //set toast colors to be more visible
+            View messageView = myMessage.getView();
+            messageView.setBackgroundColor(Color.GRAY);
+            TextView messageTextView = (TextView)myMessage.getView()
+                    .findViewById(android.R.id.message);
+            messageTextView.setTextColor(Color.WHITE);
+            myMessage.show();
+            return false;
+        } //if
+        return true;
+    } //checkPassword
+
 } //SignUpActivity
