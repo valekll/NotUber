@@ -1,28 +1,31 @@
 package edu.uga.cs.notuber;
 
+import android.os.Build;
+
 /**
  * A class for users of the app.
  */
 public class NotUberUser {
     private String username;
     private String email;
-    private String password;
+    private String uid;
+    private String first;
+    private String last;
+    private int[] dob;
 
     //constructor
     public NotUberUser() {
     }
 
     //constructor
-    public NotUberUser(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public NotUberUser(String uid) {
+        this.uid = uid;
     }
 
     //constructor
-    public NotUberUser(String username, String email, String password) {
-        this.username = username;
+    public NotUberUser(String email, String uid) {
         this.email = email;
-        this.password = password;
+        this.uid = uid;
     }
 
     //getter for username
@@ -45,13 +48,50 @@ public class NotUberUser {
         this.email = email;
     }
 
-    //getter for password
-    public String getPassword() {
-        return password;
+    //getter for uid
+    public String getUid() {
+        return uid;
     }
 
-    //setter for password
-    public void setPassword(String password) {
-        this.password = password;
+    //setter for uid
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    //getter for first
+    public String getFirst() {
+        return first;
+    }
+
+    //setter for first
+    public void setFirst(String first) {
+        this.first = first;
+    }
+
+    //getter for last
+    public String getLast() {
+        return last;
+    }
+
+    //setter for last
+    public void setLast(String last) {
+        this.last = last;
+    }
+
+    //getter for date of birth
+    public int[] getDob() {
+        return dob;
+    }
+
+    /**
+     * Sets the user's date of birth
+     * @param dob the date of birth
+     * @throws NumberFormatException if the dob variable isn't in proper date format
+     */
+    public void setDob(int[] dob) throws NumberFormatException {
+        if(dob.length != 3) {
+            throw new NumberFormatException("Not in date time format.");
+        }
+        this.dob = dob;
     }
 } //NotUberUser
