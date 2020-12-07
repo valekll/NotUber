@@ -27,6 +27,13 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView usernameTextView;
     private TextView mDisplayDate;
 
+    private String email;
+    private String username;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String phoneNum;
+
     private int[] dob;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -36,11 +43,23 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        //grab username from last screen
+        email = "";
+        password = "";
+        if(savedInstanceState != null) {
+            email = savedInstanceState.getString("EMAIL");
+            password = savedInstanceState.getString("PASSWORD");
+        } //if
+
         //init ui elements
         firstNameTextView = (TextView)findViewById(R.id.firstName);
         lastNameTextView = (TextView)findViewById(R.id.lastName);
         emailTextView = (TextView)findViewById(R.id.email);
+        if(email == null || !email.equals(""))
+            emailTextView.setText(email);
         passwordTextView = (TextView)findViewById(R.id.password);
+        if(password == null || !password.equals(""))
+            passwordTextView.setText(password);
         phoneTextView = (TextView)findViewById(R.id.phoneNumber);
 
         //init date of birth box
