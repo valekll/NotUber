@@ -44,6 +44,19 @@ public class LoginActivity extends AppCompatActivity {
         emailBox = (EditText)findViewById(R.id.emailBox);
         passwordBox = (EditText)findViewById(R.id.passwordBox);
 
+        /////////////////////////////////////////////////////////////////////////////////
+        //////////////TEMP CODE//////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////////////////////////////////
+        Button bypassButton = (Button)findViewById(R.id.bypassButton);
+        bypassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent landingIntent = new Intent(LoginActivity.this, LandingActivity.class);
+                startActivity(landingIntent);
+            }
+        });
+        /////////////////////////////////////////////////////////////////////////////////
+
         loginButton = (Button)findViewById(R.id.loginButton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -19,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Calendar;
 import java.util.regex.Matcher;
@@ -28,6 +30,8 @@ public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth myAuth;
     private FirebaseUser currUser;
+
+    private DatabaseReference myDb;
 
     private TextView firstNameTextView;
     private TextView lastNameTextView;
@@ -136,6 +140,8 @@ public class SignUpActivity extends AppCompatActivity {
                                 currUser = myAuth.getCurrentUser();
                                 NotUberUser myUser = new NotUberUser(email, currUser.getUid(),
                                         username, firstName, lastName, phoneNum, dob);
+                                myDb = FirebaseDatabase.getInstance().getReference();
+                                myDb.child("users").child(currUser.getUid()).setValue(myUser);
                             } //if
                             else {
                                 Log.d("Turtle", "Sign in attempt: fail");
