@@ -103,7 +103,7 @@
         app:layout_constraintVertical_bias="0.247" />
 
     <TextView
-        android:id="@+id/tvDate"
+        android:id="@+id/birthday"
         android:layout_width="211dp"
         android:layout_height="41dp"
         android:hint="Select Birthday"
