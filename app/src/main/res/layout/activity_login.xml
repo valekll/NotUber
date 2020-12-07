@@ -10,6 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/aldrich"
         android:text="Not Uber"
         android:textColor="#000000"
         android:textSize="36sp"
@@ -48,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/userNameBox"
         app:layout_constraintVertical_bias="0.077" />
 
-    <Button
+    <Button style= "@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/loginButton"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
@@ -65,7 +66,7 @@
         android:layout_marginTop="5dp"
         android:clickable="true"
         android:text="Not a user? Sign Up Now!"
-        android:textColor="#0000EE"
+        android:textColor="#68686A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
