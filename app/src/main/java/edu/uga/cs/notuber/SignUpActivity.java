@@ -55,6 +55,7 @@ public class SignUpActivity extends AppCompatActivity {
         } //if
 
         //init ui elements
+        usernameTextView = (TextView)findViewById(R.id.username);
         firstNameTextView = (TextView)findViewById(R.id.firstName);
         lastNameTextView = (TextView)findViewById(R.id.lastName);
         emailTextView = (TextView)findViewById(R.id.email);
