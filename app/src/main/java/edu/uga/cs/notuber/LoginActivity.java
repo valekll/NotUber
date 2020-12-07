@@ -51,11 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         bypassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-<<<<<<< Updated upstream
                 Intent landingIntent = new Intent(LoginActivity.this, LandingMainActivity.class);
-=======
-                Intent landingIntent = new Intent(LoginActivity.this, TestActivity.class);
->>>>>>> Stashed changes
                 startActivity(landingIntent);
             }
         });
@@ -134,11 +130,7 @@ public class LoginActivity extends AppCompatActivity {
     private void loginToLanding(FirebaseUser myUser) throws NullPointerException {
         if(myUser == null)
             throw new NullPointerException("FirebaseUser myUser may not be null.");
-<<<<<<< Updated upstream
         Intent landingIntent = new Intent(this, LandingInfoActivity.class);
-=======
-        Intent landingIntent = new Intent(this, TestActivity.class);
->>>>>>> Stashed changes
         startActivity(landingIntent);
     } //loginToLanding
 

@@ -9,13 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<<<<<<< Updated upstream
         <activity android:name=".LandingMainActivity"></activity>
-
-=======
-        <activity android:name=".MainActivity"></activity>
         <activity android:name=".TestActivity" />
->>>>>>> Stashed changes
         <activity android:name=".SignUpActivity"></activity>
         <activity android:name=".LandingInfoActivity" />
         <activity android:name=".LoginActivity">
