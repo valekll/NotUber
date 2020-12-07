@@ -11,19 +11,32 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.Calendar;
 
 public class SignUpActivity extends AppCompatActivity {
 
+    private FirebaseAuth myAuth;
+
+    private TextView firstNameTextView;
+    private TextView lastNameTextView;
+    private TextView emailTextView;
+    private TextView passwordTextView;
+    private TextView phoneTextView;
+    private TextView usernameTextView;
     private TextView mDisplayDate;
+
+    private int[] dob;
+
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        mDisplayDate = (TextView) findViewById(R.id.tvDate);
 
+        mDisplayDate = (TextView) findViewById(R.id.birthday);
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -41,7 +54,6 @@ public class SignUpActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
-
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {

@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
             } //onClick()
         });
 
+        //takes to sign up page
         signUpLinkText = (TextView)findViewById(R.id.signUpLinkText);
         signUpLinkText.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,6 +86,7 @@ public class LoginActivity extends AppCompatActivity {
         String email = emailBox.getText().toString();
         String password = passwordBox.getText().toString();
         if(email != null && password != null && !email.equals("") && !password.equals("")) {
+            //try to log in
             myAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -94,6 +96,7 @@ public class LoginActivity extends AppCompatActivity {
                                 currUser = myAuth.getCurrentUser();
                                 loginToLanding(currUser);
                             } //if
+                            //login fails
                             else {
                                 Log.d("Turtle", "Sign in attempt: fail");
                                 loginFail();
@@ -122,8 +125,10 @@ public class LoginActivity extends AppCompatActivity {
      * Displays a toast and fails the login.
      */
     private void loginFail() {
+        //make toast
         Toast myMessage = Toast.makeText(LoginActivity.this,
                 "Invalid Credentials", Toast.LENGTH_SHORT);
+        //set toast colors to be more visible
         View messageView = myMessage.getView();
         messageView.setBackgroundColor(Color.GRAY);
         TextView messageTextView = (TextView)myMessage.getView()
