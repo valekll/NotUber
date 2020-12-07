@@ -1,8 +1,5 @@
 package edu.uga.cs.notuber;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         bypassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent landingIntent = new Intent(LoginActivity.this, LandingActivity.class);
+                Intent landingIntent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(landingIntent);
             }
         });
