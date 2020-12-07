@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         bypassButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent landingIntent = new Intent(LoginActivity.this, LandingActivity.class);
+                Intent landingIntent = new Intent(LoginActivity.this, TestActivity.class);
                 startActivity(landingIntent);
             }
         });
