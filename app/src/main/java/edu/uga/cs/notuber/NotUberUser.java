@@ -6,12 +6,13 @@ import android.os.Build;
  * A class for users of the app.
  */
 public class NotUberUser {
-    private String username;
-    private String email;
-    private String uid;
-    private String first;
-    private String last;
-    private int[] dob;
+    public String username;
+    public String email;
+    public String uid;
+    public String first;
+    public String last;
+    public String phoneNumber;
+    public int[] dob;
 
     //constructor
     public NotUberUser() {
@@ -26,6 +27,18 @@ public class NotUberUser {
     public NotUberUser(String email, String uid) {
         this.email = email;
         this.uid = uid;
+    }
+
+    //constructor
+    public NotUberUser(String email, String uid, String username,
+                       String first, String last, String phoneNumber, int[] dob) {
+        this.email = email;
+        this.uid = uid;
+        this.username = username;
+        this.first = first;
+        this.last = last;
+        this.phoneNumber = phoneNumber;
+        this.dob = dob;
     }
 
     //getter for username
@@ -94,4 +107,17 @@ public class NotUberUser {
         }
         this.dob = dob;
     }
+
+    //getter for phone number
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    //setter for phone number
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+
+
 } //NotUberUser

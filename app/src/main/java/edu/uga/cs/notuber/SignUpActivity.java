@@ -1,5 +1,6 @@
 package edu.uga.cs.notuber;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
@@ -13,7 +14,11 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.Calendar;
 import java.util.regex.Matcher;
@@ -22,6 +27,7 @@ import java.util.regex.Pattern;
 public class SignUpActivity extends AppCompatActivity {
 
     private FirebaseAuth myAuth;
+    private FirebaseUser currUser;
 
     private TextView firstNameTextView;
     private TextView lastNameTextView;
@@ -43,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity {
     private String phoneNum;
 
     private int[] dob;
+    private boolean dateSet;
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -54,6 +61,8 @@ public class SignUpActivity extends AppCompatActivity {
         //grab username from last screen
         email = "";
         password = "";
+        dateSet = false;
+        myAuth = FirebaseAuth.getInstance();
         if(savedInstanceState != null) {
             email = savedInstanceState.getString("EMAIL");
             password = savedInstanceState.getString("PASSWORD");
@@ -97,14 +106,44 @@ public class SignUpActivity extends AppCompatActivity {
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
                 dob = new int[]{month, day, year};
+                dateSet = true;
                 String date = month + "/" + day + "/" + year;
                 mDisplayDate.setText(date);
             } //onDateSet
         };
 
         submitButton = (Button)findViewById(R.id.submitButton);
-
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signUp(checkSignUpRequirements());
+            } //onClick()
+        });
     } //onCreate()
+
+    /**
+     * Signs the user up for a Not Uber account
+     * @param checkSignUpRequirements makes sure form's requirements are met
+     */
+    private void signUp(boolean checkSignUpRequirements) {
+        if(checkSignUpRequirements) {
+            myAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if(task.isSuccessful()) {
+                                Log.d("Turtle", "Sign up attempt: success");
+                                currUser = myAuth.getCurrentUser();
+                                NotUberUser myUser = new NotUberUser(email, currUser.getUid(),
+                                        username, firstName, lastName, phoneNum, dob);
+                            } //if
+                            else {
+                                Log.d("Turtle", "Sign in attempt: fail");
+                            } //else
+                        } //onComplete()
+                    });
+        } //if
+    } //signUp()
 
     /**
      * Checks to make sure sign up requirements are made.
@@ -112,14 +151,24 @@ public class SignUpActivity extends AppCompatActivity {
      */
     private boolean checkSignUpRequirements() {
         if(checkEmptyFields()) {
-            if (checkUsername()) {
-                if (checkPassword()) {
-                    return true;
+            if(checkUsername()) {
+                if(checkPassword()) {
+                    if(checkDate()) {
+                        return true;
+                    } //if
                 } //if
             } //if
         }//if
         return false;
     } //checkSignUpRequirements
+
+    /**
+     * Checks for date compliance
+     * @return whether it checks out or not
+     */
+    private boolean checkDate() {
+        return dateSet;
+    } //checkDate()
 
     /**
      * Checks for password compliance
