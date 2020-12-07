@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     private void onLoginPressed(View view) {
         String email = emailBox.getText().toString();
         String password = passwordBox.getText().toString();
-        if(email != null && password != null) {
+        if(email != null && password != null && !email.equals("") && !password.equals("")) {
             myAuth.signInWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
@@ -95,12 +96,14 @@ public class LoginActivity extends AppCompatActivity {
                             } //if
                             else {
                                 Log.d("Turtle", "Sign in attempt: fail");
-                                Toast.makeText(LoginActivity.this,
-                                        "Invalid Credentials", Toast.LENGTH_SHORT).show();
-                            }
+                                loginFail();
+                            } //else
                         } //onComplete()
                     });
         } //if
+        else {
+            loginFail();
+        } //else
     } //onLoginPressed
 
     /**
@@ -115,4 +118,17 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(landingIntent);
     } //loginToLanding
 
+    /**
+     * Displays a toast and fails the login.
+     */
+    private void loginFail() {
+        Toast myMessage = Toast.makeText(LoginActivity.this,
+                "Invalid Credentials", Toast.LENGTH_SHORT);
+        View messageView = myMessage.getView();
+        messageView.setBackgroundColor(Color.GRAY);
+        TextView messageTextView = (TextView)myMessage.getView()
+                .findViewById(android.R.id.message);
+        messageTextView.setTextColor(Color.WHITE);
+        myMessage.show();
+    }
 } //LoginActivity
