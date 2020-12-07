@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/main_screen">
+    tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/textView"
@@ -69,7 +68,7 @@
         android:layout_marginTop="5dp"
         android:clickable="true"
         android:text="Not a user? Sign Up Now!"
-        android:textColor="#FFFFFF"
+        android:textColor="#858585"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
