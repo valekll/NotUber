@@ -29,6 +29,7 @@ public class LandingFragment extends Fragment {
     // new fragment.  Android disallows overloaded constructors for fragments, and so we can't create a Fragment with
     // the destinationIndex as argument.  But we can use the Bundle and send the data this way.  Also, the setArguments call
     // must happen BEFORE the fragment is attached an activity.
+
     public static LandingFragment newInstance(int destinationIndex ) {
 
         Log.d( TAG,"LandingFragment.newInstance(): destinationIndex: " + destinationIndex );
@@ -39,7 +40,8 @@ public class LandingFragment extends Fragment {
 
 
         // save the selected list versionIndex in the new fragment's Bundle data
-        // the CountryInfoFragment needs to know the version to display
+        // the LandingInfoFragment needs to know the version to display
+
         Bundle args = new Bundle();
         args.putInt( "destinationIndex", destinationIndex );
         fragment.setArguments( args );

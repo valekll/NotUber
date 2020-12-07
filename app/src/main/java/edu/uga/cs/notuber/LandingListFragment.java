@@ -49,7 +49,7 @@ public class LandingListFragment extends ListFragment {
 
         twoFragmentsActivity = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
-        // restore the saved list index selection (Android version no), if available
+        // restore the saved list index selection (Destination), if available
         if( savedInstanceState != null ) {
             // Restore last state for checked position.
             destinationIndex = savedInstanceState.getInt("destinationSelection", 0 );
@@ -79,7 +79,7 @@ public class LandingListFragment extends ListFragment {
         // on a click on a list item, show the selected Android version info
         // store the list view and selection for coming back to the list (using the back button)
         //firstVisibleVersionIndex = l.getFirstVisiblePosition();
-        //versionIndex = position;
+        //destinationIndex = position;
         showDestinationInfo( position );
     }
 

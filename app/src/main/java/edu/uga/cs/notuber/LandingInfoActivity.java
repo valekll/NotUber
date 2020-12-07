@@ -28,10 +28,10 @@ public class LandingInfoActivity extends AppCompatActivity {
         //
         // We can't use the Parent specification in the AndroidManifest, since
         // it would place the activity on the back stack.  Consequently, when going
-        // back to the screen with the list of Android versions (using the "parent-specified"
+        // back to the screen with the list of Destinations (using the "parent-specified"
         // back button, this would cause a recreation of the ListFragment.  The new list
-        // would show the initial item (Android version) as selected, not the one we
-        // actually selected when transitioning to the Android version details screen.
+        // would show the initial item (Destination) as selected, not the one we
+        // actually selected when transitioning to the Destination details screen.
         //
         // However, there must be a listener added for this back button (look below).
         ActionBar actionBar = getSupportActionBar();
@@ -39,7 +39,7 @@ public class LandingInfoActivity extends AppCompatActivity {
 
         // if this call is in landscape orientation, do nothing and return,
         // as the main activity w/ ListFragment will do the work.
-        // In fact, CountryListFragment will control this work.
+        // In fact, LandingListFragment will control this work.
         if( getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ) {
             Log.d( TAG, "LandingInfoActivity.onCreate(): in landscape mode; returning" );
             finish();
