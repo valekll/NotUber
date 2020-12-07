@@ -130,7 +130,7 @@ public class LoginActivity extends AppCompatActivity {
     private void loginToLanding(FirebaseUser myUser) throws NullPointerException {
         if(myUser == null)
             throw new NullPointerException("FirebaseUser myUser may not be null.");
-        Intent landingIntent = new Intent(this, LandingInfoActivity.class);
+        Intent landingIntent = new Intent(this, LandingMainActivity.class);
         startActivity(landingIntent);
     } //loginToLanding
 
