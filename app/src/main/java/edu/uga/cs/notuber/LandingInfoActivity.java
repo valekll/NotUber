@@ -11,14 +11,14 @@ import androidx.appcompat.app.AppCompatActivity;
 /**
  * An activity to show destinations utilizing fragments
  */
-public class LandingActivity extends AppCompatActivity {
+public class LandingInfoActivity extends AppCompatActivity {
 
     // a TAG to identify logcat events
     private static final String TAG = "destinations";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "LandingActivity.onCreate()");
+        Log.d(TAG, "LandingInfoActivity.onCreate()");
 
         super.onCreate(savedInstanceState);
 
@@ -41,15 +41,15 @@ public class LandingActivity extends AppCompatActivity {
         // as the main activity w/ ListFragment will do the work.
         // In fact, CountryListFragment will control this work.
         if( getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ) {
-            Log.d( TAG, "LandingActivity.onCreate(): in landscape mode; returning" );
+            Log.d( TAG, "LandingInfoActivity.onCreate(): in landscape mode; returning" );
             finish();
             return;
         }
 
-        Log.d(TAG, "LandingActivity.onCreate(): in portrait mode; replacing fragments");
+        Log.d(TAG, "LandingInfoActivity.onCreate(): in portrait mode; replacing fragments");
 
         LandingFragment landingFragment = new LandingFragment();
-        Log.d(TAG, "LandingActivity.onCreate(): landingFragment: " + landingFragment);
+        Log.d(TAG, "LandingInfoActivity.onCreate(): landingFragment: " + landingFragment);
 
 
         // pass on any saved data, i.e., Android version no (list index)

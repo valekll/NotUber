@@ -124,7 +124,7 @@ public class LandingListFragment extends ListFragment {
         else {
             // In a 1 fragment orientation (portrait), start a new activity using an Intent, as in the previous demo app
             Intent intent = new Intent();
-            intent.setClass( getActivity(), LandingActivity.class );
+            intent.setClass( getActivity(), LandingInfoActivity.class );
             intent.putExtra("destinationIndex", destinationIndex);
 
             startActivity( intent );

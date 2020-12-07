@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 /**
  * A simple activity to show destinations utilizing fragments.
  */
-public class MainActivity extends AppCompatActivity {
+public class LandingMainActivity extends AppCompatActivity {
 
     private static final String DEBUG_TAG = "Destinations";
 
@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         // this call will create the UI based on the screen in portrait orientation.
         // /res/layout/activity_country_main.xml will be used;
         // in landscape orientation /res/layout-land/activity_country_main.xml will be used
-        setContentView( R.layout.activity_main);
+        setContentView( R.layout.activity_landing_main);
     }
 
 
