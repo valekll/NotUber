@@ -36,6 +36,14 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
+        //init ui elements
+        firstNameTextView = (TextView)findViewById(R.id.firstName);
+        lastNameTextView = (TextView)findViewById(R.id.lastName);
+        emailTextView = (TextView)findViewById(R.id.email);
+        passwordTextView = (TextView)findViewById(R.id.password);
+        phoneTextView = (TextView)findViewById(R.id.phoneNumber);
+
+        //init date of birth box
         mDisplayDate = (TextView) findViewById(R.id.birthday);
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,15 +60,17 @@ public class SignUpActivity extends AppCompatActivity {
                         year,month,day);
                 dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 dialog.show();
-            }
+            } //onClick
         });
+        //get date of birth box to set date
         mDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
                 month = month + 1;
+                dob = new int[]{month, day, year};
                 String date = month + "/" + day + "/" + year;
                 mDisplayDate.setText(date);
-            }
+            } //onDateSet
         };
-    }
-}
+    } //onCreate()
+} //SignUpActivity
