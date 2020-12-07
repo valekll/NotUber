@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
@@ -26,6 +27,8 @@ public class SignUpActivity extends AppCompatActivity {
     private TextView phoneTextView;
     private TextView usernameTextView;
     private TextView mDisplayDate;
+
+    private Button submitButton;
 
     private String email;
     private String username;
@@ -91,5 +94,8 @@ public class SignUpActivity extends AppCompatActivity {
                 mDisplayDate.setText(date);
             } //onDateSet
         };
+
+        submitButton = (Button)findViewById(R.id.submitButton);
+        
     } //onCreate()
 } //SignUpActivity
