@@ -96,6 +96,6 @@ public class SignUpActivity extends AppCompatActivity {
         };
 
         submitButton = (Button)findViewById(R.id.submitButton);
-        
+
     } //onCreate()
 } //SignUpActivity
