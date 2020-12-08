@@ -85,12 +85,12 @@ public class LandingListFragment extends ListFragment {
     } //onActivityCreated()
 
     @Override
-    public void onListItemClick( ListView l, View v, int position, long id ) {
-        showListingInfo( position );
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        showListingInfo(position);
     } //onListItemClick()
 
     @Override
-    public void onSaveInstanceState( Bundle outState ) {
+    public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         // save the list index selection
