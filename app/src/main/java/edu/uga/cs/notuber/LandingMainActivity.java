@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -18,6 +19,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 /**
@@ -28,6 +30,7 @@ public class LandingMainActivity extends AppCompatActivity implements Navigation
     private static final String DEBUG_TAG = "Destinations";
 
     private FirebaseAuth myAuth;
+    private FirebaseUser currUser;
     private Button logoutButton;
     private ClipData.Item logout;
 
@@ -35,9 +38,16 @@ public class LandingMainActivity extends AppCompatActivity implements Navigation
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
 
+    private TextView usernameTextView;
+    private TextView ridepointsTextView;
+
     private MenuItem logoutItem;
     private Menu navMenu;
 
+    /**
+     * OnCreate for the main landing page
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +57,9 @@ public class LandingMainActivity extends AppCompatActivity implements Navigation
         setSupportActionBar(toolbar);
         navigationView = findViewById(R.id.nav_view);
         navMenu = navigationView.getMenu();
+
+        usernameTextView = findViewById(R.id.usernameTextView);
+        ridepointsTextView = findViewById(R.id.ridePointsTextView);
 
         logoutItem = navMenu.findItem(R.id.logout);
 

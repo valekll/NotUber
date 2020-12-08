@@ -31,15 +31,6 @@ public class LandingInfoActivity extends AppCompatActivity {
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
         actionBar.setDisplayHomeAsUpEnabled( true );
 
-        // if this call is in landscape orientation, do nothing and return,
-        // as the main activity w/ ListFragment will do the work.
-        // In fact, LandingListFragment will control this work.
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            finish();
-            return;
-        } //if
-
-
         LandingFragment landingFragment = new LandingFragment();
 
         if(getIntent().getExtras() == null) {
