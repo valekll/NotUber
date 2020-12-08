@@ -29,6 +29,8 @@ public class RideListing {
     public int rideCost;
     public boolean complete;
 
+    private NotUberUser rider;
+
     //constructor
     public RideListing() {
         rideId = "";
@@ -176,14 +178,15 @@ public class RideListing {
      * @return the details
      */
     public String obtainRideDetails() {
-        final NotUberUser[] rider = {null};
-        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference("users/" + riderUid);
-        myDbRef.addValueEventListener(new ValueEventListener() {
+        Log.d("Titanium", "RiderUid: " + riderUid);
+        FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myDbRef = fbDatabase.getReference("users/" + riderUid);
+        myDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                rider[0] = snapshot.getValue(NotUberUser.class);
-                if(rider[0] != null) {
-                    Log.d("Titanium", rider[0].toString());
+                rider = snapshot.getValue(NotUberUser.class);
+                if(rider != null) {
+                    Log.d("Titanium", rider.toString());
                 } //if
             } //onDataChange()
 
@@ -192,7 +195,7 @@ public class RideListing {
                 Log.d("Titanium", "User data read failed.");
             } //onCancelled()
         });
-        String details = "Passenger: " + rider[0].first + "\nPickup Location:\n" + originAddress +
+        String details = "Passenger: " + rider.getFirst() + "\nPickup Location:\n" + originAddress +
                 "\n" + originCity + "\nDrop Off Location:\n" + destinationAddress + "\n" +
                 destinationCity + "\nRidePoints Available: " + rideCost;
         return details;
@@ -202,7 +205,7 @@ public class RideListing {
     @Override
     public String toString() {
         return rideId;
-    }
+    } //toString()
 
     //another toString method
     public String toCompleteString() {
@@ -215,6 +218,6 @@ public class RideListing {
                 ", rideCost=" + rideCost +
                 ", complete=" + complete +
                 '}';
-    }
+    } //toCompleteString()
 
 } //RideListing

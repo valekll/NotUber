@@ -51,17 +51,15 @@ public class LandingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         View fragmentView = inflater.inflate(R.layout.fragment_landing, container, false);
-        if(savedInstanceState != null) {
-            String rideId = savedInstanceState.getString(RIDEIDTAG);
 
-            RideListing listing = getRideListing(rideId);
+        String rideId = getArguments().getString(RIDEIDTAG);
+        RideListing listing = getRideListing(rideId);
 
-            TextView listingTitleTextView = (TextView) getView().findViewById(R.id.rideListingTitleTextView);
-            listingTitleTextView.setText(listing.obtainRideTitle());
-            TextView listingDetailsTextView = (TextView) getView().findViewById(R.id.rideListingDetailsTextView);
-            listingDetailsTextView.setText(listing.obtainRideDetails());
-            Button acceptButton = (Button) getView().findViewById(R.id.acceptButton);
-        }
+        TextView listingTitleTextView = (TextView) fragmentView.findViewById(R.id.rideListingTitleTextView);
+        listingTitleTextView.setText(listing.obtainRideTitle());
+        TextView listingDetailsTextView = (TextView) fragmentView.findViewById(R.id.rideListingDetailsTextView);
+        listingDetailsTextView.setText(listing.obtainRideDetails());
+        Button acceptButton = (Button) fragmentView.findViewById(R.id.acceptButton);
         return fragmentView;
     } //onCreateView()
 
