@@ -6,6 +6,7 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -49,10 +50,22 @@ public class LandingFragment extends Fragment {
         return fragment;
     }
 
+
+    /**
+     * Creates the fragment's view
+     * @param inflater the inflater
+     * @param container the viewgroup
+     * @param savedInstanceState the saved instance data
+     * @return the view
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
 
         View fragmentView = inflater.inflate(R.layout.fragment_landing, container, false);
+
+        TextView listingTitleTextView = (TextView)getView().findViewById(R.id.rideListingTitleTextView);
+        TextView listingDetailsTextView = (TextView)getView().findViewById(R.id.rideListingDetailsTextView);
+        Button acceptButton = (Button)getView().findViewById(R.id.acceptButton);
 
         return fragmentView;
     }
