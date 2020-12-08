@@ -55,7 +55,7 @@
         android:id="@+id/button"
         android:layout_width="208dp"
         android:layout_height="46dp"
-        android:text="@string/add_destination"
+        android:text="Request Ride"
         app:backgroundTint="@color/mtrl_fab_bg_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,17 +80,18 @@
         app:layout_constraintVertical_bias="0.13999999" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/editTextTextMultiLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:gravity="start|top"
         android:hint="Note for Driver"
-        android:inputType="textPersonName"
+        android:inputType="textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.53" />
+        app:layout_constraintVertical_bias="0.533" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
