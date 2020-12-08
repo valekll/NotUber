@@ -58,9 +58,9 @@ public class LandingInfoActivity extends AppCompatActivity {
     } //onCreate()
 
     /**
-     *
-     * @param item
-     * @return
+     * Back button in toolbar
+     * @param item the menu item
+     * @return the item selected action
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
