@@ -68,6 +68,7 @@
                 android:layout_height="46dp"
                 android:layout_marginTop="20dp"
                 android:text="Request Ride"
+                android:textColor="#000000"
                 app:backgroundTint="@color/mtrl_fab_bg_color_selector" />
 
         </LinearLayout>
