@@ -10,6 +10,9 @@ import android.widget.ListView;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.ListFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * An activity to show destinations utilizing fragments
  */
@@ -19,13 +22,7 @@ public class LandingListFragment extends ListFragment {
     private static final String TAG = "Destinations";
 
     // Array of destination strings for the list fragment
-    private String[] destinations = {
-            "Destination 1",
-            "Destination 2",
-            "Destination 3",
-            "Destination 4",
-            "Destination 5"
-    };
+    private List<RideListing> destinations;
 
     // indicate if this is a landscape mode with both fragments present or not
     boolean twoFragmentsActivity = false;
@@ -40,6 +37,12 @@ public class LandingListFragment extends ListFragment {
 
         Log.d( TAG, "LandingListFragment.onActivityCreated(): savedInstanceState: " + savedInstanceState );
 
+        destinations = new ArrayList<RideListing>();
+        for(int i = 0; i < 100; i++) {
+            RideListing ride = new RideListing();
+            ride.setRideId("R" + i);
+            destinations.add(ride);
+        }
         // create a new ArrayAdapter for the list
         setListAdapter( new ArrayAdapter<>( getActivity(), android.R.layout.simple_list_item_activated_1, destinations ) );
 

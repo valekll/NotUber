@@ -12,11 +12,21 @@ public class RideListing {
     public String destinationAddress;
     public String riderNotes;
     public String driverNotes;
+    public int distance;
     public int rideCost;
     public boolean complete;
 
     //constructor
-    public RideListing() { complete = false; }
+    public RideListing() {
+        rideId = "";
+        riderUid = "";
+        driverUid = "";
+        originAddress = "";
+        destinationAddress = "";
+        riderNotes = "";
+        driverNotes = "";
+        complete = false;
+    }
 
     //getter for ride's id
     public String getRideId() {
@@ -88,6 +98,16 @@ public class RideListing {
         this.driverNotes = driverNotes;
     }
 
+    //getter for ride distance
+    public int getDistance() {
+        return distance;
+    }
+
+    //setter for ride distance
+    public void setDistance(int distance) {
+        this.distance = distance;
+    }
+
     //getter for ride cost
     public int getRideCost() {
         return rideCost;
@@ -111,6 +131,11 @@ public class RideListing {
     //toString method
     @Override
     public String toString() {
+        return rideId;
+    }
+
+    //another toString method
+    public String toCompleteString() {
         return "RideListing{" +
                 "rideId='" + rideId + '\'' +
                 ", riderUid='" + riderUid + '\'' +
@@ -121,4 +146,5 @@ public class RideListing {
                 ", complete=" + complete +
                 '}';
     }
+
 } //RideListing
