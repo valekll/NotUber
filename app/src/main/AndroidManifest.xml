@@ -10,8 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DriverMissionActivity"></activity>
-        <activity android:name=".LandingMainActivity" />
-
+        <activity android:name=".LandingMainActivity" ></activity>
+        <activity android:name=".AddRideActivity"
+            android:theme="@style/AppActionBarTheme">></activity>
         <activity
             android:name=".TestActivity"
             android:parentActivityName=".LandingMainActivity">
@@ -28,6 +29,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LandingMainActivity" />
         </activity>
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

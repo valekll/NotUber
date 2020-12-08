@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -60,8 +61,6 @@ public class LandingMainActivity extends AppCompatActivity implements Navigation
             }
         });
 
-
-
         drawerLayout = findViewById(R.id.drawer_Layout);
         ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(
                 this,
@@ -81,27 +80,22 @@ public class LandingMainActivity extends AppCompatActivity implements Navigation
         // this call will create the UI based on the screen in portrait orientation.
         // /res/layout/activity_country_main.xml will be used;
         // in landscape orientation /res/layout-land/activity_country_main.xml will be used
-
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addIntent = new Intent(LandingMainActivity.this,
+                        AddRideActivity.class);
+                startActivity(addIntent);
+            }
+        });
     } //onCreate()
-
-    private void setNavigationViewListener() {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-    }
 
 
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.logout:
-                // Handle logout click
-                Toast.makeText(LandingMainActivity.this, "Logged Out", Toast.LENGTH_SHORT).show();
-                return true;
-            default:
                 return false;
-        }
     }
 
     @Override
