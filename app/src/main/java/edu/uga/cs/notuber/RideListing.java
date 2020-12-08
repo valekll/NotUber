@@ -26,7 +26,6 @@ public class RideListing {
     public String destinationCity;
     public String riderNotes;
     public String driverNotes;
-    public int distance;
     public int rideCost;
     public boolean complete;
 
@@ -135,16 +134,6 @@ public class RideListing {
     //setter for driver's notes
     public void setDriverNotes(String driverNotes) {
         this.driverNotes = driverNotes;
-    }
-
-    //getter for ride distance
-    public int getDistance() {
-        return distance;
-    }
-
-    //setter for ride distance
-    public void setDistance(int distance) {
-        this.distance = distance;
     }
 
     //getter for ride cost
