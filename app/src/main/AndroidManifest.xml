@@ -16,13 +16,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LandingMainActivity" />
         </activity>
-        <activity android:name=".SignUpActivity"
-            android:parentActivityName=".LoginActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".LoginActivity" />
+        <activity android:name=".SignUpActivity">
         </activity>
         <activity android:name=".LandingInfoActivity"
+            android:theme="@style/AppActionBarTheme"
             android:parentActivityName=".LandingMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
