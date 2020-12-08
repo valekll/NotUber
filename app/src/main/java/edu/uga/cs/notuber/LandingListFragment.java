@@ -9,8 +9,15 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.ListFragment;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,27 +34,80 @@ public class LandingListFragment extends ListFragment {
     public static List<RideListing> rideListings;
 
     // list selection index
-    int listingIndex = 0;
-    String listingId = "";
+    private int listingIndex = 0;
+    private String listingId = "";
+    private Bundle savedInstanceState;
 
+    /**
+     * OnCreate method for creating the fragment.
+     * @param savedInstanceState
+     */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.savedInstanceState = savedInstanceState;
+        getRideListings();
+    } //onCreate()
+
+    /**
+     *
+     * @param savedInstanceState
+     */
     @Override
     public void onActivityCreated( Bundle savedInstanceState ) {
         super.onActivityCreated(savedInstanceState);
+    } //onActivityCreated()
 
-        Log.d( TAG, "LandingListFragment.onActivityCreated(): savedInstanceState: " + savedInstanceState );
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
 
+        // save the list index selection
+        outState.putInt( LandingFragment.LISTINGINDEX, listingIndex);
+    } //onSaveInstanceState()
+
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        Log.d("Titanium", "onlistitemclick activated");
+        showListingInfo(position);
+    } //onListItemClick()
+
+
+
+    /**
+     * Gets the ride listings from the databse.
+     */
+    private void getRideListings() {
         rideListings = new ArrayList<RideListing>();
-        for(int i = 0; i < 100; i++) {
-            RideListing ride = new RideListing();
-            ride.setRideId("R" + i);
-            ride.setRiderUid("LmGrrtLrLtd2fu6eEtllfhu9Zyf2");
-            ride.setRideCost(100);
-            ride.setOriginAddress("Origin Address");
-            ride.setOriginCity("Origin City");
-            ride.setDestinationAddress("Destination Address");
-            ride.setDestinationCity("Destination City");
-            rideListings.add(ride);
-        } //for
+        rideListings.add(new RideListing());
+        FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myDbRef = fbDatabase.getReference("rideListings");
+        myDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    Log.d("Titanium", "snapshots: " + snapshot.getChildrenCount());
+                    for(DataSnapshot listingSnapshot : snapshot.getChildren()) {
+                        RideListing listing = listingSnapshot.getValue(RideListing.class);
+                        Log.d("Titanium", listing.toCompleteString());
+                        rideListings.add(listing);
+                    } //for
+                } //if
+                setupArrayAdapter();
+            } //onDataChange()
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Titanium", "User data read failed.");
+            } //onCancelled()
+        });
+    } //getRideListings()
+
+    /**
+     * Sets up the array adapter.
+     */
+    private void setupArrayAdapter() {
+
         // create a new ArrayAdapter for the list
         setListAdapter( new ArrayAdapter<>( getActivity(), R.layout.list_item_for_array_adapter, rideListings ) );
 
@@ -67,32 +127,12 @@ public class LandingListFragment extends ListFragment {
         // i.e., "below" the end of the screen in landscape orientation.
         // To make it visible again, call smoothScrollToPosition
         getListView().smoothScrollToPosition( listingIndex );
-        /*
-        getListView().setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("Titanium", "onclick activated");
-                showListingInfo(i);
-            } //onItemClick()
-        });
+    } //setupArrayAdapter()
 
-         */
-    } //onActivityCreated()
-
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        Log.d("Titanium", "onlistitemclick activated");
-        showListingInfo(position);
-    } //onListItemClick()
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-
-        // save the list index selection
-        outState.putInt( LandingFragment.LISTINGINDEX, listingIndex);
-    } //onSaveInstanceState()
-
+    /**
+     * Launches an intent to allow driver to see a listing in depth.
+     * @param listingIndex the listing in question
+     */
     private void showListingInfo( int listingIndex ) {
 
         this.listingIndex = listingIndex;
@@ -106,10 +146,5 @@ public class LandingListFragment extends ListFragment {
         intent.putExtra(LandingFragment.LISTINGINDEX, listingIndex);
         startActivity(intent);
     } //showListingInfo()
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    } //onCreate()
 } //LandingListFragment
 

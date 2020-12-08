@@ -167,7 +167,7 @@ public class RideListing {
     //toString method
     @Override
     public String toString() {
-        return rideId;
+        return obtainRideTitle() + " - " + rideCost;
     } //toString()
 
     //another toString method

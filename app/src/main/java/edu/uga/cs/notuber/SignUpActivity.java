@@ -145,7 +145,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 myDb.child("users").child(currUser.getUid()).setValue(myUser);
                                 Intent landingIntent = new Intent(SignUpActivity.this,
                                         LandingMainActivity.class);
-                                startActivity(landingIntent); 
+                                startActivity(landingIntent);
                             } //if
                             else {
                                 Log.d("Turtle", "Sign up attempt: fail");
