@@ -17,20 +17,24 @@ public class NotUberUser {
     public int day;
     public int month;
     public int year;
+    public int ridePoints;
 
     //constructor
     public NotUberUser() {
+        this.ridePoints = 1000;
     }
 
     //constructor
     public NotUberUser(String uid) {
         this.uid = uid;
+        this.ridePoints = 1000;
     }
 
     //constructor
     public NotUberUser(String email, String uid) {
         this.email = email;
         this.uid = uid;
+        this.ridePoints = 1000;
     }
 
     //constructor
@@ -45,6 +49,7 @@ public class NotUberUser {
         this.day = day;
         this.month = month;
         this.year = year;
+        this.ridePoints = 1000;
     }
 
     //getter for username
@@ -125,6 +130,16 @@ public class NotUberUser {
     //setter year
     public void setYear(int year) {
         this.year = year;
+    }
+
+    //getter ride points
+    public int getRidePoints() {
+        return ridePoints;
+    }
+
+    //getter ride points
+    public void setRidePoints(int ridePoints) {
+        this.ridePoints = ridePoints;
     }
 
     //getter for phone number
