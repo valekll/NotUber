@@ -53,7 +53,7 @@ public class LandingListFragment extends ListFragment {
         setListAdapter( new ArrayAdapter<>( getActivity(), android.R.layout.simple_list_item_activated_1, rideListings ) );
 
         //set the twoFragmentsActivity variable to true iff we are in 2 fragment (landscape) view
-        View detailsFrame = getActivity().findViewById( R.id.destinationInfo );
+                View detailsFrame = getActivity().findViewById( R.id.destinationInfo );
 
         twoFragmentsActivity = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
