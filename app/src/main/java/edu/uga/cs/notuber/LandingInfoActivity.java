@@ -46,6 +46,7 @@ public class LandingInfoActivity extends AppCompatActivity {
             Log.d("TETRIS", "bundle is null :(");
         } else {
             Log.d("TETRIS", "bundle is not null :)");
+            Log.d("TETRIS", "bundle: " + getIntent().getExtras());
         }
         // pass on any saved data, i.e., Android version no (list index)
         landingFragment.setArguments(getIntent().getExtras());

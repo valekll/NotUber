@@ -33,7 +33,6 @@ public class LandingListFragment extends ListFragment {
 
     @Override
     public void onActivityCreated( Bundle savedInstanceState ) {
-
         super.onActivityCreated(savedInstanceState);
 
         Log.d( TAG, "LandingListFragment.onActivityCreated(): savedInstanceState: " + savedInstanceState );
@@ -106,11 +105,13 @@ public class LandingListFragment extends ListFragment {
 
             getListView().setItemChecked( listingIndex, false );
 
+            Log.d("TETRIS", "line 110 will be executed");
             // get the placeholder element (FrameLayout) in a 2 fragment (landscape) orientation layout
-            LandingFragment details = (LandingFragment) getFragmentManager().findFragmentById( R.id.destinationInfo );
+            LandingFragment details = (LandingFragment) getFragmentManager().findFragmentById(R.id.destinationInfo);
 
             if( details == null || details.getShownListingIndex() != listingIndex ) {
 
+                Log.d("TETRIS", "line 116 will be executed");
                 // obtain a new destination info fragment instance
                 details = LandingFragment.newInstance(rideListings.get(listingIndex).getRideId());
 
@@ -126,6 +127,7 @@ public class LandingListFragment extends ListFragment {
             } //if
         } //if
         else {
+            Log.d("TETRIS", "line 132 will be executed");
             // In a 1 fragment orientation (portrait), start a new activity using an Intent, as in the previous demo app
             Intent intent = new Intent();
             intent.setClass( getActivity(), LandingInfoActivity.class );
