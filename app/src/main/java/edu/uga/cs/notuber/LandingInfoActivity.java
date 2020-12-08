@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -34,8 +33,8 @@ public class LandingInfoActivity extends AppCompatActivity {
         // actually selected when transitioning to the Destination details screen.
         //
         // However, there must be a listener added for this back button (look below).
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled( true );
+        //ActionBar actionBar = getSupportActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled( false );
 
         // if this call is in landscape orientation, do nothing and return,
         // as the main activity w/ ListFragment will do the work.
