@@ -52,49 +52,14 @@ public class LandingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
 
-        Log.d( TAG, "LandingFragment.onCreateView()" );
         View fragmentView = inflater.inflate(R.layout.fragment_landing, container, false);
-        /*
-        // Programmatically, create a scrollable TextView to show the Android version information
-        ScrollView scroller = new ScrollView( getActivity()) ;
-        TextView textView = new TextView( getActivity() );
-        ImageView imageView = new ImageView(getActivity());
 
-        // Set the padding for the new TextView
-        // These padding attributes are normally defined in the XML file
-        // here, they are set programmatically.
-        int padding = (int) TypedValue.applyDimension( TypedValue.COMPLEX_UNIT_DIP, 12, getActivity().getResources().getDisplayMetrics() );
-        textView.setPadding( padding, padding, padding, padding );
-
-        // set the text size
-        textView.setTextSize( TypedValue.COMPLEX_UNIT_SP, 18f );
-
-        // show the destination info
-        //textView.setText( destinationInfo[ getShownDestinationIndex() ] );
-
-       //if (getShownDestinationIndex() == 0) {
-
-       // } else if (getShownDestinationIndex() == 1) {
-
-        //} else if (getShownDestinationIndex() == 2) {
-
-        //
-        //} else {
-
-        //} // if else
-
-        //LinearLayout picture = new LinearLayout(getActivity());
-
-       // picture.addView(textView);
-        //picture.addView(imageView);
-        //.setOrientation(LinearLayout.VERTICAL);
-        //scroller.addView(picture);
-
-        */
         return fragmentView;
     }
+
     public int getShownDestinationIndex() {
         return getArguments().getInt("destinationIndex", 0 );
     }
+
 }
 
