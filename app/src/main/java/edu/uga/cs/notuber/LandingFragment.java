@@ -53,7 +53,8 @@ public class LandingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
 
         Log.d( TAG, "LandingFragment.onCreateView()" );
-
+        View fragmentView = inflater.inflate(R.layout.fragment_landing, container, false);
+        /*
         // Programmatically, create a scrollable TextView to show the Android version information
         ScrollView scroller = new ScrollView( getActivity()) ;
         TextView textView = new TextView( getActivity() );
@@ -89,8 +90,8 @@ public class LandingFragment extends Fragment {
         //.setOrientation(LinearLayout.VERTICAL);
         //scroller.addView(picture);
 
-
-        return scroller;
+        */
+        return fragmentView;
     }
     public int getShownDestinationIndex() {
         return getArguments().getInt("destinationIndex", 0 );
