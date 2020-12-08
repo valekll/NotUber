@@ -15,6 +15,10 @@ public class LandingInfoActivity extends AppCompatActivity {
     // a TAG to identify logcat events
     private static final String TAG = "destinations";
 
+    /**
+     * Creates the Landing Activity.
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "LandingInfoActivity.onCreate()");
@@ -50,7 +54,6 @@ public class LandingInfoActivity extends AppCompatActivity {
         LandingFragment landingFragment = new LandingFragment();
         Log.d(TAG, "LandingInfoActivity.onCreate(): landingFragment: " + landingFragment);
 
-
         // pass on any saved data, i.e., Android version no (list index)
         landingFragment.setArguments( getIntent().getExtras() );
 
@@ -61,6 +64,12 @@ public class LandingInfoActivity extends AppCompatActivity {
         // it reference the root (ViewGroup) of the entire content area of an Activity
         getSupportFragmentManager().beginTransaction().replace( android.R.id.content, landingFragment ).commit();
     }
+
+    /**
+     *
+     * @param item
+     * @return
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Implement Back button listener method.

@@ -10,13 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LandingMainActivity"></activity>
-        <activity android:name=".TestActivity" />
-        <activity android:name=".SignUpActivity"></activity>
-        <activity android:name=".LandingInfoActivity" />
+        <activity android:name=".TestActivity"
+            android:parentActivityName=".LandingMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingMainActivity" />
+        </activity>
+        <activity android:name=".SignUpActivity"
+            android:parentActivityName=".LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LoginActivity" />
+        </activity>
+        <activity android:name=".LandingInfoActivity"
+            android:parentActivityName=".LandingMainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".LandingMainActivity" />
+        </activity>
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
