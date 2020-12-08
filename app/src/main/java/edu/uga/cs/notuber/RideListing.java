@@ -9,6 +9,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 /**
@@ -30,6 +31,7 @@ public class RideListing {
     public boolean complete;
 
     private NotUberUser rider;
+    private String details;
 
     //constructor
     public RideListing() {
@@ -172,34 +174,6 @@ public class RideListing {
     public String obtainRideTitle() {
         return originCity + " to " + destinationCity;
     } //obtainRideTitle()
-
-    /**
-     * Getter for the ride's details
-     * @return the details
-     */
-    public String obtainRideDetails() {
-        Log.d("Titanium", "RiderUid: " + riderUid);
-        FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myDbRef = fbDatabase.getReference("users/" + riderUid);
-        myDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                rider = snapshot.getValue(NotUberUser.class);
-                if(rider != null) {
-                    Log.d("Titanium", rider.toString());
-                } //if
-            } //onDataChange()
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Log.d("Titanium", "User data read failed.");
-            } //onCancelled()
-        });
-        String details = "Passenger: " + rider.getFirst() + "\nPickup Location:\n" + originAddress +
-                "\n" + originCity + "\nDrop Off Location:\n" + destinationAddress + "\n" +
-                destinationCity + "\nRidePoints Available: " + rideCost;
-        return details;
-    } //obtainRideDetails()
 
     //toString method
     @Override

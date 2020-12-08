@@ -46,7 +46,7 @@ public class LandingListFragment extends ListFragment {
             ride.setOriginAddress("Origin Address");
             ride.setOriginCity("Origin City");
             ride.setDestinationAddress("Destination Address");
-            ride.setDestinationAddress("Destination City");
+            ride.setDestinationCity("Destination City");
             rideListings.add(ride);
         } //for
         // create a new ArrayAdapter for the list

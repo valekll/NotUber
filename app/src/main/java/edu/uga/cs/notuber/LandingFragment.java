@@ -11,7 +11,15 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 /**
  * A simple activity that show destination utilizing fragments
@@ -20,7 +28,10 @@ public class LandingFragment extends Fragment {
 
     public static final String RIDEIDTAG = "RIDEID";
     public static final String LISTINGINDEX = "LISTINGINDEX";
-    private static final String TAG = "destinationInfo";
+
+    private TextView listingTitleTextView;
+    private TextView listingDetailsTextView;
+    private Button acceptButton;
 
     /**
      * Generates a new instance of Landing fragment based on a ride id.
@@ -55,11 +66,11 @@ public class LandingFragment extends Fragment {
         String rideId = getArguments().getString(RIDEIDTAG);
         RideListing listing = getRideListing(rideId);
 
-        TextView listingTitleTextView = (TextView) fragmentView.findViewById(R.id.rideListingTitleTextView);
+        listingTitleTextView = (TextView) fragmentView.findViewById(R.id.rideListingTitleTextView);
         listingTitleTextView.setText(listing.obtainRideTitle());
-        TextView listingDetailsTextView = (TextView) fragmentView.findViewById(R.id.rideListingDetailsTextView);
-        listingDetailsTextView.setText(listing.obtainRideDetails());
-        Button acceptButton = (Button) fragmentView.findViewById(R.id.acceptButton);
+        listingDetailsTextView = (TextView) fragmentView.findViewById(R.id.rideListingDetailsTextView);
+        obtainRideDetails(listing);
+        acceptButton = (Button) fragmentView.findViewById(R.id.acceptButton);
         return fragmentView;
     } //onCreateView()
 
@@ -85,6 +96,38 @@ public class LandingFragment extends Fragment {
         return null;
     } //getRideListing()
 
+    /**
+     * Gets the ride listing's details based on the ride listing.
+     * @param listing the listing
+     * @return the details
+     */
+    private void obtainRideDetails(final RideListing listing) {
+        FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myDbRef = fbDatabase.getReference("users/" + listing.getRiderUid());
+        myDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    Log.d("Titanium", "Snapshot exists");
+                    NotUberUser rider = snapshot.getValue(NotUberUser.class);
+                    if (rider != null) {
+                        String details = "Passenger: " + rider.getFirst() + "\nPickup Location:\n" +
+                                listing.getOriginAddress() + "\n" + listing.getOriginCity() +
+                                "\nDrop Off Location:\n" + listing.getDestinationAddress() + "\n" +
+                                listing.getDestinationCity() + "\nRidePoints Available: " +
+                                listing.getRideCost();
+
+                        listingDetailsTextView.setText(details);
+                    } //if
+                } //if
+            } //onDataChange()
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Titanium", "User data read failed.");
+            } //onCancelled()
+        });
+    } //obtainRideDetails()
 
 } //LandingFragment
 
