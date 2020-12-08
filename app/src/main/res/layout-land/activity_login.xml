@@ -49,12 +49,15 @@
         app:layout_constraintTop_toBottomOf="@+id/emailBox"
         app:layout_constraintVertical_bias="0.077" />
 
-    <Button style = "@style/Widget.AppCompat.Button.Colored"
+    <Button
         android:id="@+id/loginButton"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:text="Login"
+        android:textColor="#000000"
+        app:backgroundTint="@color/mtrl_fab_bg_color_selector"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordBox" />
@@ -71,5 +74,17 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
+    <Button
+        android:id="@+id/bypassButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bypass"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.499"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordBox"
+        app:layout_constraintVertical_bias="0.818" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
