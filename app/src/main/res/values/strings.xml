@@ -4,4 +4,6 @@
     <string name="closeNavDrawer" />
     <string name="shared" />
     <string name="my_files" />
+    <string name="add_destination">Add Destination</string>
+    <string name="destination_address">Destination Address</string>
 </resources>
