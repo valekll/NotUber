@@ -22,13 +22,14 @@ public class LandingListFragment extends ListFragment {
     private static final String TAG = "Destinations";
 
     // Array of destination strings for the list fragment
-    private List<RideListing> destinations;
+    public static List<RideListing> rideListings;
 
     // indicate if this is a landscape mode with both fragments present or not
     boolean twoFragmentsActivity = false;
 
     // list selection index
-    int destinationIndex = 0;
+    int listingIndex = 0;
+    String listingId = "";
 
     @Override
     public void onActivityCreated( Bundle savedInstanceState ) {
@@ -37,81 +38,81 @@ public class LandingListFragment extends ListFragment {
 
         Log.d( TAG, "LandingListFragment.onActivityCreated(): savedInstanceState: " + savedInstanceState );
 
-        destinations = new ArrayList<RideListing>();
+        rideListings = new ArrayList<RideListing>();
         for(int i = 0; i < 100; i++) {
             RideListing ride = new RideListing();
             ride.setRideId("R" + i);
-            destinations.add(ride);
-        }
+            ride.setRiderUid("LmGrrtLrLtd2fu6eEtllfhu9Zyf2");
+            ride.setRideCost(100);
+            ride.setOriginAddress("Origin Address");
+            ride.setOriginCity("Origin City");
+            ride.setDestinationAddress("Destination Address");
+            ride.setDestinationAddress("Destination City");
+            rideListings.add(ride);
+        } //for
         // create a new ArrayAdapter for the list
-        setListAdapter( new ArrayAdapter<>( getActivity(), android.R.layout.simple_list_item_activated_1, destinations ) );
+        setListAdapter( new ArrayAdapter<>( getActivity(), android.R.layout.simple_list_item_activated_1, rideListings ) );
 
         // set the twoFragmentsActivity variable to true iff we are in 2 fragment (landscape) view
         View detailsFrame = getActivity().findViewById( R.id.destinationInfo );
-        Log.d( TAG, "LandingListFragment.onActivityCreated(): detailsFrame: " + detailsFrame );
 
         twoFragmentsActivity = detailsFrame != null && detailsFrame.getVisibility() == View.VISIBLE;
 
-        // restore the saved list index selection (Destination), if available
-        if( savedInstanceState != null ) {
+        // restore the saved list index selection (listing index), if available
+        if(savedInstanceState != null) {
             // Restore last state for checked position.
-            destinationIndex = savedInstanceState.getInt("destinationSelection", 0 );
-            Log.d( TAG, "LandingListFragment.onActivityCreated(): restored versionIndex: " + destinationIndex );
-        }
+            listingIndex = savedInstanceState.getInt(LandingFragment.LISTINGINDEX, 0 );
+            listingId = savedInstanceState.getString(LandingFragment.RIDEIDTAG);
+        } //if
 
         // set the list mode as single choice and
         getListView().setChoiceMode( ListView.CHOICE_MODE_SINGLE );
-        getListView().setItemChecked( destinationIndex, true );
+        getListView().setItemChecked( listingIndex, false );
 
         // if we are in 2 fragment (landscape) orientation, show the Android version information on the right side
         // This class will act as the "driver" here by displaying the details using the other fragment.
         if( twoFragmentsActivity ) {
 
             // display the information about the selected destination in the fragment on the right (details)
-            showDestinationInfo( destinationIndex );
+            showListingInfo( listingIndex );
 
             // The list in the landscape orientation may be shorter and the selected item
             // which was visible in portrait mode might be invisible (out of view)
             // i.e., "below" the end of the screen in landscape orientation.
             // To make it visible again, call smoothScrollToPosition
-            getListView().smoothScrollToPosition( destinationIndex );
-        }
-    }
+            getListView().smoothScrollToPosition( listingIndex );
+        } //if
+    } //onActivityCreated()
+
     @Override
     public void onListItemClick( ListView l, View v, int position, long id ) {
-        // on a click on a list item, show the selected Android version info
-        // store the list view and selection for coming back to the list (using the back button)
-        //firstVisibleVersionIndex = l.getFirstVisiblePosition();
-        //destinationIndex = position;
-        showDestinationInfo( position );
-    }
+        showListingInfo( position );
+    } //onListItemClick()
 
     @Override
     public void onSaveInstanceState( Bundle outState ) {
         super.onSaveInstanceState(outState);
 
         // save the list index selection
-        outState.putInt( "destinationSelection", destinationIndex);
-        Log.d( TAG, "LandingListFragment.onSaveInstanceState(): saved destinationIndex: " + destinationIndex );
-    }
+        outState.putInt( LandingFragment.LISTINGINDEX, listingIndex);
 
-    void showDestinationInfo( int destinationIndex ) {
+    } //onSaveInstanceState()
 
-        this.destinationIndex = destinationIndex;
+    void showListingInfo( int listingIndex ) {
 
-        if( twoFragmentsActivity ) {  // only in the 2 fragment (landscape) orientation
+        this.listingIndex = listingIndex;
 
-            getListView().setItemChecked( destinationIndex, true );
+        if(twoFragmentsActivity) {  // only in the 2 fragment (landscape) orientation
+
+            getListView().setItemChecked( listingIndex, false );
 
             // get the placeholder element (FrameLayout) in a 2 fragment (landscape) orientation layout
             LandingFragment details = (LandingFragment) getFragmentManager().findFragmentById( R.id.destinationInfo );
 
-            Log.d( TAG, "LandingListFragment.showDestinationInfo(): details: " + details );
-
-            if( details == null || details.getShownDestinationIndex() != destinationIndex ) {
+            if( details == null || details.getShownListingIndex() != listingIndex ) {
 
                 // obtain a new destination info fragment instance
-                details = LandingFragment.newInstance( destinationIndex );
+                details = LandingFragment.newInstance(rideListings.get(listingIndex).getRideId());
 
                 // replace the placeholder with the new fragment stance within a transaction
                 FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
@@ -128,7 +129,8 @@ public class LandingListFragment extends ListFragment {
             // In a 1 fragment orientation (portrait), start a new activity using an Intent, as in the previous demo app
             Intent intent = new Intent();
             intent.setClass( getActivity(), LandingInfoActivity.class );
-            intent.putExtra("destinationIndex", destinationIndex);
+            intent.putExtra(LandingFragment.RIDEIDTAG, rideListings.get(listingIndex).getRideId());
+            intent.putExtra(LandingFragment.LISTINGINDEX, listingIndex);
 
             startActivity( intent );
         }

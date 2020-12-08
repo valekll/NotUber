@@ -1,5 +1,16 @@
 package edu.uga.cs.notuber;
 
+import android.util.Log;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 /**
  * A ride listed by a driver for a rider to see.
  */
@@ -9,7 +20,9 @@ public class RideListing {
     public String riderUid;
     public String driverUid;
     public String originAddress;
+    public String originCity;
     public String destinationAddress;
+    public String destinationCity;
     public String riderNotes;
     public String driverNotes;
     public int distance;
@@ -22,7 +35,9 @@ public class RideListing {
         riderUid = "";
         driverUid = "";
         originAddress = "";
+        originCity = "";
         destinationAddress = "";
+        destinationCity = "";
         riderNotes = "";
         driverNotes = "";
         complete = false;
@@ -68,6 +83,16 @@ public class RideListing {
         this.originAddress = originAddress;
     }
 
+    //getter for origin city
+    public String getOriginCity() {
+        return originCity;
+    }
+
+    //setter for origin city
+    public void setOriginCity(String originCity) {
+        this.originCity = originCity;
+    }
+
     //getter for destination address
     public String getDestinationAddress() {
         return destinationAddress;
@@ -76,6 +101,16 @@ public class RideListing {
     //setter for destination address
     public void setDestinationAddress(String destinationAddress) {
         this.destinationAddress = destinationAddress;
+    }
+
+    //getter for destination city
+    public String getDestinationCity() {
+        return destinationCity;
+    }
+
+    //setter for destination city
+    public void setDestinationCity(String destinationCity) {
+        this.destinationCity = destinationCity;
     }
 
     //getter for rider's notes
@@ -127,6 +162,41 @@ public class RideListing {
     public void setComplete(boolean complete) {
         this.complete = complete;
     }
+
+    /**
+     * Getter for the ride's title
+     * @return the title
+     */
+    public String obtainRideTitle() {
+        return originCity + " to " + destinationCity;
+    } //obtainRideTitle()
+
+    /**
+     * Getter for the ride's details
+     * @return the details
+     */
+    public String obtainRideDetails() {
+        final NotUberUser[] rider = {null};
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference("users/" + riderUid);
+        myDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                rider[0] = snapshot.getValue(NotUberUser.class);
+                if(rider[0] != null) {
+                    Log.d("Titanium", rider[0].toString());
+                } //if
+            } //onDataChange()
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Titanium", "User data read failed.");
+            } //onCancelled()
+        });
+        String details = "Passenger: " + rider[0].first + "\nPickup Location:\n" + originAddress +
+                "\n" + originCity + "\nDrop Off Location:\n" + destinationAddress + "\n" +
+                destinationCity + "\nRidePoints Available: " + rideCost;
+        return details;
+    } //obtainRideDetails()
 
     //toString method
     @Override

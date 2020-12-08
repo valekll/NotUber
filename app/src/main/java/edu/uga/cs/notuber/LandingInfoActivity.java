@@ -24,8 +24,6 @@ public class LandingInfoActivity extends AppCompatActivity {
      */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "LandingInfoActivity.onCreate()");
-
         super.onCreate(savedInstanceState);
 
         // Add the back button in the ActionBar of this activity.
@@ -36,27 +34,28 @@ public class LandingInfoActivity extends AppCompatActivity {
         // if this call is in landscape orientation, do nothing and return,
         // as the main activity w/ ListFragment will do the work.
         // In fact, LandingListFragment will control this work.
-        if( getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ) {
-            Log.d( TAG, "LandingInfoActivity.onCreate(): in landscape mode; returning" );
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             finish();
             return;
-        }
+        } //if
 
-        Log.d(TAG, "LandingInfoActivity.onCreate(): in portrait mode; replacing fragments");
 
         LandingFragment landingFragment = new LandingFragment();
-        Log.d(TAG, "LandingInfoActivity.onCreate(): landingFragment: " + landingFragment);
 
+        if(getIntent().getExtras() == null) {
+            Log.d("TETRIS", "bundle is null :(");
+        } else {
+            Log.d("TETRIS", "bundle is not null :)");
+        }
         // pass on any saved data, i.e., Android version no (list index)
-        landingFragment.setArguments( getIntent().getExtras() );
+        landingFragment.setArguments(getIntent().getExtras());
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // add the fragment within a transaction
         // android.R.id.content is used to obtain the view reference without having to have its id
         // it reference the root (ViewGroup) of the entire content area of an Activity
         getSupportFragmentManager().beginTransaction().replace( android.R.id.content, landingFragment ).commit();
-    }
+    } //onCreate()
 
     /**
      *
@@ -66,12 +65,10 @@ public class LandingInfoActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Implement Back button listener method.
-        // This method may be used for other actions from the ActionBar menu, if provided in the layout.
-        // android.R.id.home is the built-in designation of the back button widget.
         if(item.getItemId() == android.R.id.home ) {
             onBackPressed();
             return true;
-        }
+        } //if
         return super.onOptionsItemSelected( item );
-    }
-}
+    } //onOptionsItemSelected()
+} //LandingInfoActivity

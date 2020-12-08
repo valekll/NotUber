@@ -18,38 +18,28 @@ import androidx.fragment.app.Fragment;
  */
 public class LandingFragment extends Fragment {
 
-    private String[] destinationInfo = {
-
-    };
-
+    public static final String RIDEIDTAG = "RIDEID";
+    public static final String LISTINGINDEX = "LISTINGINDEX";
     private static final String TAG = "destinationInfo";
 
-    // This method is similar to the factory method design pattern
-    // to create new instances of this fragment.
-    // There is a specific reason for having this method, though.  We want to send some data (DestinationIndex, here) into the
-    // new fragment.  Android disallows overloaded constructors for fragments, and so we can't create a Fragment with
-    // the destinationIndex as argument.  But we can use the Bundle and send the data this way.  Also, the setArguments call
-    // must happen BEFORE the fragment is attached an activity.
-
-    public static LandingFragment newInstance(int destinationIndex ) {
-
-        Log.d( TAG,"LandingFragment.newInstance(): destinationIndex: " + destinationIndex );
+    /**
+     * Generates a new instance of Landing fragment based on a ride id.
+     * @param rideId the ride listing id
+     * @return the fragment
+     */
+    public static LandingFragment newInstance(String rideId) {
 
         // this uses the default constructor (not defined in this class, but Java-supplied)
         LandingFragment fragment = new LandingFragment();
-        Log.d(TAG, "LandingFragment.newInstance(): fragment: " + fragment);
-
-
         // save the selected list versionIndex in the new fragment's Bundle data
         // the LandingInfoFragment needs to know the version to display
 
         Bundle args = new Bundle();
-        args.putInt( "destinationIndex", destinationIndex );
-        fragment.setArguments( args );
+        args.putString(RIDEIDTAG, rideId);
+        fragment.setArguments(args);
 
         return fragment;
-    }
-
+    } //newInstance()
 
     /**
      * Creates the fragment's view
@@ -60,19 +50,43 @@ public class LandingFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-
         View fragmentView = inflater.inflate(R.layout.fragment_landing, container, false);
+        if(savedInstanceState != null) {
+            String rideId = savedInstanceState.getString(RIDEIDTAG);
 
-        TextView listingTitleTextView = (TextView)getView().findViewById(R.id.rideListingTitleTextView);
-        TextView listingDetailsTextView = (TextView)getView().findViewById(R.id.rideListingDetailsTextView);
-        Button acceptButton = (Button)getView().findViewById(R.id.acceptButton);
+            RideListing listing = getRideListing(rideId);
 
+            TextView listingTitleTextView = (TextView) getView().findViewById(R.id.rideListingTitleTextView);
+            listingTitleTextView.setText(listing.obtainRideTitle());
+            TextView listingDetailsTextView = (TextView) getView().findViewById(R.id.rideListingDetailsTextView);
+            listingDetailsTextView.setText(listing.obtainRideDetails());
+            Button acceptButton = (Button) getView().findViewById(R.id.acceptButton);
+        }
         return fragmentView;
-    }
+    } //onCreateView()
 
-    public int getShownDestinationIndex() {
-        return getArguments().getInt("destinationIndex", 0 );
-    }
+    /**
+     * Gets the listing index.
+     * @return the index
+     */
+    public int getShownListingIndex() {
+        return getArguments().getInt(LISTINGINDEX, 0 );
+    } //getShownListingIndex()
 
-}
+    /**
+     * Gets the ride listing based on the ride id
+     * @param rideId the ride's id string
+     * @return the ride listing
+     */
+    private RideListing getRideListing(String rideId) {
+        for(RideListing rl : LandingListFragment.rideListings) {
+            if(rl.getRideId().equals(rideId)) {
+                return rl;
+            } //if
+        } //for
+        return null;
+    } //getRideListing()
+
+
+} //LandingFragment
 
