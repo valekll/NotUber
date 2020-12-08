@@ -1,27 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:title="STORAGAE">
+    <item android:title="">
         <menu>
             <item android:title="@string/my_files"></item>
 
-            <item android:title="@string/shared"></item>
 
-            <item android:title="Starred"></item>
+            <item android:title="Log Out"
+            android:id="@+id/logout">
 
-            <item android:title="Recent"></item>
-
-            <item android:title="Backup"></item>
-
-        </menu>
-    </item>
-
-    <item android:title="APP">
-        <menu>
-            <item android:title="Settings"></item>
-
-            <item android:title="Log Out"></item>
-
+            </item>
         </menu>
     </item>
 

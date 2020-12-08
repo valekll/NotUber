@@ -11,6 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".DriverMissionActivity"></activity>
         <activity android:name=".LandingMainActivity" />
+
         <activity
             android:name=".TestActivity"
             android:parentActivityName=".LandingMainActivity">
