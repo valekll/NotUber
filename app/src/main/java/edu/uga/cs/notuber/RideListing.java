@@ -10,6 +10,8 @@ public class RideListing {
     public String driverUid;
     public String originAddress;
     public String destinationAddress;
+    public String riderNotes;
+    public String driverNotes;
     public int rideCost;
     public boolean complete;
 
@@ -66,6 +68,26 @@ public class RideListing {
         this.destinationAddress = destinationAddress;
     }
 
+    //getter for rider's notes
+    public String getRiderNotes() {
+        return riderNotes;
+    }
+
+    //setter for rider's notes
+    public void setRiderNotes(String riderNotes) {
+        this.riderNotes = riderNotes;
+    }
+
+    //getter for driver's notes
+    public String getDriverNotes() {
+        return driverNotes;
+    }
+
+    //setter for driver's notes
+    public void setDriverNotes(String driverNotes) {
+        this.driverNotes = driverNotes;
+    }
+
     //getter for ride cost
     public int getRideCost() {
         return rideCost;
@@ -84,5 +106,19 @@ public class RideListing {
     //setter for ride status
     public void setComplete(boolean complete) {
         this.complete = complete;
+    }
+
+    //toString method
+    @Override
+    public String toString() {
+        return "RideListing{" +
+                "rideId='" + rideId + '\'' +
+                ", riderUid='" + riderUid + '\'' +
+                ", driverUid='" + driverUid + '\'' +
+                ", originAddress='" + originAddress + '\'' +
+                ", destinationAddress='" + destinationAddress + '\'' +
+                ", rideCost=" + rideCost +
+                ", complete=" + complete +
+                '}';
     }
 } //RideListing
