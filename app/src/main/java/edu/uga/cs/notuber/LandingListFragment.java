@@ -123,8 +123,8 @@ public class LandingListFragment extends ListFragment {
 
                 // commit the transaction, i.e. make the changes
                 fragmentTransaction.commit();
-            }
-        }
+            } //if
+        } //if
         else {
             // In a 1 fragment orientation (portrait), start a new activity using an Intent, as in the previous demo app
             Intent intent = new Intent();
@@ -133,19 +133,12 @@ public class LandingListFragment extends ListFragment {
             intent.putExtra(LandingFragment.LISTINGINDEX, listingIndex);
 
             startActivity( intent );
-        }
-    }
+        } //else
+    } //showListingInfo()
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Log.d( TAG, "LandingListFragment.onCreate()" );
-
-        // IMPORTANT: this method call will prevent this fragment from being destroyed when
-        // recreating the hosting activity. Consequently, the list will be retained.
-        //setRetainInstance( true );
-    }
-
-}
+    } //onCreate()
+} //LandingListFragment
 
