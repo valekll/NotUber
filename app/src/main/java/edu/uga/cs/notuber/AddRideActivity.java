@@ -65,7 +65,8 @@ public class AddRideActivity extends AppCompatActivity {
         requestRideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                requestRide();
+                Intent requestRideIntent =  new Intent (AddRideActivity.this, AwaitRideActivity.class);
+                startActivity(requestRideIntent);
             } //onClick()
         });
     } //onCreate()
