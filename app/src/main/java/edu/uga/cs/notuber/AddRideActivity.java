@@ -22,7 +22,7 @@ import java.util.UUID;
 
 public class AddRideActivity extends AppCompatActivity {
 
-    public final String RIDEID = "RIDEID";
+    public static final String RIDEID = "RIDEID";
 
     private FirebaseAuth myAuth;
 
