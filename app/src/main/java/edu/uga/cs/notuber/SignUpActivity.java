@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -142,6 +143,9 @@ public class SignUpActivity extends AppCompatActivity {
                                         username, firstName, lastName, phoneNum, dob[1], dob[0], dob[2]);
                                 myDb = FirebaseDatabase.getInstance().getReference();
                                 myDb.child("users").child(currUser.getUid()).setValue(myUser);
+                                Intent landingIntent = new Intent(SignUpActivity.this,
+                                        LandingMainActivity.class);
+                                startActivity(landingIntent); 
                             } //if
                             else {
                                 Log.d("Turtle", "Sign up attempt: fail");
