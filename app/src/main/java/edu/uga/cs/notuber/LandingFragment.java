@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,9 +28,14 @@ public class LandingFragment extends Fragment {
     public static final String RIDEIDTAG = "RIDEID";
     public static final String LISTINGINDEX = "LISTINGINDEX";
 
+    private FirebaseAuth myAuth;
+    private FirebaseUser currUser;
+
     private TextView listingTitleTextView;
     private TextView listingDetailsTextView;
     private Button acceptButton;
+
+    private RideListing myRideListing;
 
     /**
      * Generates a new instance of Landing fragment based on a ride id.
@@ -60,21 +67,25 @@ public class LandingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         View fragmentView = inflater.inflate(R.layout.fragment_landing, container, false);
 
+        myAuth = FirebaseAuth.getInstance();
         final String rideId = getArguments().getString(RIDEIDTAG);
-        RideListing listing = getRideListing(rideId);
+        myRideListing = getRideListing(rideId);
+        currUser = myAuth.getCurrentUser();
 
         listingTitleTextView = (TextView) fragmentView.findViewById(R.id.rideListingTitleTextView);
-        listingTitleTextView.setText(listing.obtainRideTitle());
+        listingTitleTextView.setText(myRideListing.obtainRideTitle());
         listingDetailsTextView = (TextView) fragmentView.findViewById(R.id.rideListingDetailsTextView);
-        obtainRideDetails(listing);
+        obtainRideDetails(myRideListing);
         acceptButton = (Button) fragmentView.findViewById(R.id.acceptButton);
         acceptButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
+                myRideListing.setInProgess(true);
+                myRideListing.setDriverUid(currUser.getUid());
                 FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
-                DatabaseReference listingCompletion = fbDatabase.getReference("rideListings/" +
-                        rideId + "/inProgress");
-                listingCompletion.setValue(true);
+                DatabaseReference listingAccepted = fbDatabase.getReference("rideListings/" +
+                        rideId);
+                listingAccepted.setValue(myRideListing);
                 Intent acceptIntent = new Intent(getActivity(), DriverMissionActivity.class);
                 acceptIntent.putExtra(RIDEIDTAG, rideId);
                 startActivity(acceptIntent);
