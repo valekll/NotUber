@@ -30,11 +30,7 @@ public class AwaitRideActivity extends AppCompatActivity {
         // Add the back button in the ActionBar of this activity.
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
-        //rideId = getIntent().getExtras().getString(AddRideActivity.RIDEID);
-        //rideIdTextView = (TextView)findViewById(R.id.rideIdTextView);
-        //rideIdTextView.setText(rideId);
+        actionBar.setDisplayHomeAsUpEnabled(false);
 
         Button confirmButton = (Button)findViewById(R.id.confirmButton);
         confirmButton.setOnClickListener(new View.OnClickListener() {
@@ -42,21 +38,8 @@ public class AwaitRideActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent confirmIntent = new Intent(AwaitRideActivity.this, LandingMainActivity.class);
                 startActivity(confirmIntent);
-            }
+            } //onClick()
         });
     } //onCreate()
-    /**
-     * Back button in toolbar
-     * @param item the menu item
-     * @return the item selected action
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Implement Back button listener method.
-        if(item.getItemId() == android.R.id.home ) {
-            onBackPressed();
-            return true;
-        } //if
-        return super.onOptionsItemSelected( item );
-    } //onOptionsItemSelected()
+
 } //AwaitRideActivity

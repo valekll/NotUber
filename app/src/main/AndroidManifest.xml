@@ -10,7 +10,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".AwaitRideActivity"
-            android:theme="@style/AppActionBarTheme"></activity>
+            android:theme="@style/AppActionBarTheme">
+        </activity>
         <activity android:name=".DriverMissionActivity" />
         <activity android:name=".LandingMainActivity" />
         <activity

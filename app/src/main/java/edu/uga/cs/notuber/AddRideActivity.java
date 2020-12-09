@@ -68,6 +68,15 @@ public class AddRideActivity extends AppCompatActivity {
                 requestRide();
             } //onClick()
         });
+
+        Button bypassButton = (Button)findViewById(R.id.bypass2Button);
+        bypassButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent awaitIntent = new Intent(AddRideActivity.this, AwaitRideActivity.class);
+                startActivity(awaitIntent);
+            } //onClick()
+        });
     } //onCreate()
 
     /**
