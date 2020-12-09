@@ -88,7 +88,8 @@ public class LandingListFragment extends ListFragment {
                     for(DataSnapshot listingSnapshot : snapshot.getChildren()) {
                         RideListing listing = listingSnapshot.getValue(RideListing.class);
                         Log.d("Titanium", listing.toCompleteString());
-                        rideListings.add(listing);
+                        if(!listing.complete)
+                            rideListings.add(listing);
                     } //for
                 } //if
                 setupArrayAdapter();
@@ -145,5 +146,6 @@ public class LandingListFragment extends ListFragment {
         intent.putExtra(LandingFragment.LISTINGINDEX, listingIndex);
         startActivity(intent);
     } //showListingInfo()
+
 } //LandingListFragment
 
