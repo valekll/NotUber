@@ -100,6 +100,8 @@ public class AddRideActivity extends AppCompatActivity {
                     .findViewById(android.R.id.message);
             messageTextView.setTextColor(Color.WHITE);
             myMessage.show();
+
+            //make ride listing
             myRideListing = new RideListing();
             myRideListing.setRideId(UUID.randomUUID().toString()); //generate random unique id
             myRideListing.setRiderUid(myAuth.getCurrentUser().getUid());
@@ -113,6 +115,7 @@ public class AddRideActivity extends AppCompatActivity {
             myRideListing.setRideCost(Integer.parseInt(rideCostAsString));
             myRideListing.setRiderNotes(riderNotesTextView.getText().toString());
 
+            //put in Database
             FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
             DatabaseReference myDbRef = fbDatabase.getReference("rideListings/" +
                     myRideListing.getRideId());
