@@ -12,13 +12,13 @@
         android:layout_height="wrap_content"
         android:text="Waiting on a Driver..."
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/rideDetailsTextView"
+        app:layout_constraintBottom_toTopOf="@+id/rideDetailsRiderTextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/awaitInstructionsTextView" />
 
     <TextView
-        android:id="@+id/rideDetailsTextView"
+        android:id="@+id/rideDetailsRiderTextView"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:textColor="#000000"
@@ -37,7 +37,7 @@
         android:text="Please do not exit this screen until you have arrived at your destination."
         android:textColor="#000000"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/confirmButton"
+        app:layout_constraintBottom_toTopOf="@+id/confirmArrivalButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -45,7 +45,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/confirmButton"
+        android:id="@+id/confirmArrivalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"

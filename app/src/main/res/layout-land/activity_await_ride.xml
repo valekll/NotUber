@@ -7,7 +7,7 @@
     tools:context=".AwaitRideActivity">
 
     <TextView
-        android:id="@+id/rideDetailsTextView"
+        android:id="@+id/rideDetailsDriverTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="RideId"
@@ -19,18 +19,18 @@
         app:layout_constraintVertical_bias="0.122" />
 
     <TextView
-        android:id="@+id/awaitInstructionsTextView"
+        android:id="@+id/missionInstructionsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/confirmButton"
+        app:layout_constraintBottom_toTopOf="@+id/confirmDropOffButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rideDetailsTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/rideDetailsDriverTextView" />
 
     <Button
-        android:id="@+id/confirmButton"
+        android:id="@+id/confirmDropOffButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"

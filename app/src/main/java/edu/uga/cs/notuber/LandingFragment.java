@@ -60,7 +60,7 @@ public class LandingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         View fragmentView = inflater.inflate(R.layout.fragment_landing, container, false);
 
-        String rideId = getArguments().getString(RIDEIDTAG);
+        final String rideId = getArguments().getString(RIDEIDTAG);
         RideListing listing = getRideListing(rideId);
 
         listingTitleTextView = (TextView) fragmentView.findViewById(R.id.rideListingTitleTextView);
@@ -71,9 +71,14 @@ public class LandingFragment extends Fragment {
         acceptButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                Intent acceptIntent = new Intent(getActivity(),DriverMissionActivity.class);
+                FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference listingCompletion = fbDatabase.getReference("rideListings/" +
+                        rideId + "/inProgress");
+                listingCompletion.setValue(true);
+                Intent acceptIntent = new Intent(getActivity(), DriverMissionActivity.class);
+                acceptIntent.putExtra(RIDEIDTAG, rideId);
                 startActivity(acceptIntent);
-            }
+            } //onClick()
         });
         return fragmentView;
     } //onCreateView()

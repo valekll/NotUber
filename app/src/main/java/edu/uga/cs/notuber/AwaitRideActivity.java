@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -46,7 +45,7 @@ public class AwaitRideActivity extends AppCompatActivity {
 
         rideId = getIntent().getExtras().getString(AddRideActivity.RIDEID);
         obtainRideDetails();
-        confirmButton = (Button)findViewById(R.id.confirmButton);
+        confirmButton = (Button)findViewById(R.id.confirmArrivalButton);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -96,8 +95,9 @@ public class AwaitRideActivity extends AppCompatActivity {
                                 listing.getOriginAddress() + "\n" + listing.getOriginCity() +
                                 "\nDrop Off Location:\n" + listing.getDestinationAddress() + "\n" +
                                 listing.getDestinationCity() + "\nDriver Notes: " + listing.getDriverNotes();
-                        TextView rideDetailsTextView = findViewById(R.id.rideDetailsTextView);
+                        TextView rideDetailsTextView = findViewById(R.id.rideDetailsRiderTextView);
                         rideDetailsTextView.setText(details);
+                        obtainDriverDetails();
                     } //if
                 } //if
             } //onDataChange()
@@ -136,6 +136,6 @@ public class AwaitRideActivity extends AppCompatActivity {
                 Log.d("Titanium", "User data read failed.");
             } //onCancelled()
         });
-    } //obtainRideDetails()
+    } //obtainDriverDetails()
 
 } //AwaitRideActivity
