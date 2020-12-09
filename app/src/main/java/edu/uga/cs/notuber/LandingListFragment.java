@@ -88,7 +88,7 @@ public class LandingListFragment extends ListFragment {
                     for(DataSnapshot listingSnapshot : snapshot.getChildren()) {
                         RideListing listing = listingSnapshot.getValue(RideListing.class);
                         Log.d("Titanium", listing.toCompleteString());
-                        if(!listing.complete)
+                        if(!(listing.isComplete() || listing.isInProgess()))
                             rideListings.add(listing);
                     } //for
                 } //if

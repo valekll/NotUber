@@ -28,6 +28,7 @@ public class RideListing {
     public String driverNotes;
     public int rideCost;
     public boolean complete;
+    public boolean inProgess;
 
     private NotUberUser rider;
     private String details;
@@ -44,6 +45,7 @@ public class RideListing {
         riderNotes = "";
         driverNotes = "";
         complete = false;
+        inProgess = false;
     }
 
     //getter for ride's id
@@ -154,6 +156,16 @@ public class RideListing {
     //setter for ride status
     public void setComplete(boolean complete) {
         this.complete = complete;
+    }
+
+    //getter for in progress
+    public boolean isInProgess() {
+        return inProgess;
+    }
+
+    //setter for in progress
+    public void setInProgess(boolean inProgess) {
+        this.inProgess = inProgess;
     }
 
     /**
