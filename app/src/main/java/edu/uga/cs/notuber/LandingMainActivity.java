@@ -20,6 +20,11 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 /**
@@ -31,15 +36,15 @@ public class LandingMainActivity extends AppCompatActivity implements Navigation
 
     private FirebaseAuth myAuth;
     private FirebaseUser currUser;
+
+    private NotUberUser myUser;
+
     private Button logoutButton;
     private ClipData.Item logout;
 
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-
-    private TextView usernameTextView;
-    private TextView ridepointsTextView;
 
     private MenuItem logoutItem;
     private Menu navMenu;
@@ -53,13 +58,33 @@ public class LandingMainActivity extends AppCompatActivity implements Navigation
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing_main);
         myAuth = FirebaseAuth.getInstance();
+        currUser = myAuth.getCurrentUser();
         toolbar = findViewById(R.id.main_toolbar);
         setSupportActionBar(toolbar);
         navigationView = findViewById(R.id.nav_view);
         navMenu = navigationView.getMenu();
 
-        usernameTextView = findViewById(R.id.usernameTextView);
-        ridepointsTextView = findViewById(R.id.ridePointsTextView);
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference("users/" +
+                                                                                currUser.getUid());
+        myDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    myUser = snapshot.getValue(NotUberUser.class);
+                    if(myUser != null) {
+                        TextView usernameTextView = findViewById(R.id.usernameTextView);
+                        TextView ridepointsTextView = findViewById(R.id.ridePointsTextView);
+                        usernameTextView.setText(myUser.getUsername().toUpperCase());
+                        ridepointsTextView.setText(Integer.toString(myUser.getRidePoints()) + " RidePoints");
+                    }
+                } //if
+            } //onDataChange()
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Titanium", "User data read failed.");
+            }
+        });
 
         logoutItem = navMenu.findItem(R.id.logout);
 

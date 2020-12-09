@@ -148,5 +148,5 @@ public class LoginActivity extends AppCompatActivity {
                 .findViewById(android.R.id.message);
         messageTextView.setTextColor(Color.WHITE);
         myMessage.show();
-    }
+    } //loginFail()
 } //LoginActivity

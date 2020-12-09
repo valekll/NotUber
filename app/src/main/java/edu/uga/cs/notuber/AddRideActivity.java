@@ -65,8 +65,7 @@ public class AddRideActivity extends AppCompatActivity {
         requestRideButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent requestRideIntent =  new Intent (AddRideActivity.this, AwaitRideActivity.class);
-                startActivity(requestRideIntent);
+                requestRide();
             } //onClick()
         });
     } //onCreate()
@@ -90,29 +89,66 @@ public class AddRideActivity extends AppCompatActivity {
      * Requests a ride and posts a listing.
      */
     private void requestRide() {
-        Toast.makeText(AddRideActivity.this, "Requesting Ride", Toast.LENGTH_SHORT);
-        myRideListing = new RideListing();
-        myRideListing.setRideId(UUID.randomUUID().toString()); //generate random unique id
-        myRideListing.setRiderUid(myAuth.getCurrentUser().getUid());
-        myRideListing.setOriginAddress(originAddressTextView.getText().toString());
-        myRideListing.setOriginCity(originCityTextView.getText().toString());
-        myRideListing.setDestinationAddress(destinationAddressTextView.getText().toString());
-        myRideListing.setDestinationCity(destinationCityTextView.getText().toString());
-        Log.d("Titanium", rideCostTextView.getText().toString()); // Do not delete line
-        String rideCostAsString = rideCostTextView.getText().toString();
-        Log.d("Titanium", rideCostAsString); // Do not delete line
-        myRideListing.setRideCost(Integer.parseInt(rideCostAsString));
-        myRideListing.setRiderNotes(riderNotesTextView.getText().toString());
+        if(checkForEmptyFields()) {
+            //make toast
+            Toast myMessage = Toast.makeText(AddRideActivity.this,
+                    "Requesting ride!", Toast.LENGTH_SHORT);
+            //set toast colors to be more visible
+            View messageView = myMessage.getView();
+            messageView.setBackgroundColor(Color.GRAY);
+            TextView messageTextView = (TextView)myMessage.getView()
+                    .findViewById(android.R.id.message);
+            messageTextView.setTextColor(Color.WHITE);
+            myMessage.show();
+            myRideListing = new RideListing();
+            myRideListing.setRideId(UUID.randomUUID().toString()); //generate random unique id
+            myRideListing.setRiderUid(myAuth.getCurrentUser().getUid());
+            myRideListing.setOriginAddress(originAddressTextView.getText().toString());
+            myRideListing.setOriginCity(originCityTextView.getText().toString());
+            myRideListing.setDestinationAddress(destinationAddressTextView.getText().toString());
+            myRideListing.setDestinationCity(destinationCityTextView.getText().toString());
+            Log.d("Titanium", rideCostTextView.getText().toString()); // Do not delete line
+            String rideCostAsString = rideCostTextView.getText().toString();
+            Log.d("Titanium", rideCostAsString); // Do not delete line
+            myRideListing.setRideCost(Integer.parseInt(rideCostAsString));
+            myRideListing.setRiderNotes(riderNotesTextView.getText().toString());
 
-        FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myDbRef = fbDatabase.getReference("rideListings/" +
-                myRideListing.getRideId());
-        myDbRef.setValue(myRideListing);
+            FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference myDbRef = fbDatabase.getReference("rideListings/" +
+                    myRideListing.getRideId());
+            myDbRef.setValue(myRideListing);
 
-        Intent awaitRideIntent = new Intent(this, AwaitRideActivity.class);
-        awaitRideIntent.putExtra(RIDEID, myRideListing.getRideId());
-        startActivity(awaitRideIntent);
+            Intent awaitRideIntent = new Intent(this, AwaitRideActivity.class);
+            awaitRideIntent.putExtra(RIDEID, myRideListing.getRideId());
+            startActivity(awaitRideIntent);
+        } //if
+        else {
+            //make toast
+            Toast myMessage = Toast.makeText(AddRideActivity.this,
+                    "Please complete form", Toast.LENGTH_SHORT);
+            //set toast colors to be more visible
+            View messageView = myMessage.getView();
+            messageView.setBackgroundColor(Color.GRAY);
+            TextView messageTextView = (TextView)myMessage.getView()
+                    .findViewById(android.R.id.message);
+            messageTextView.setTextColor(Color.WHITE);
+            myMessage.show();
+        } //else
     } //requestRide()
+
+    /**
+     * Checks for empty fields.
+     * @return true if no empty fields
+     */
+    private boolean checkForEmptyFields() {
+        if(originAddressTextView.getText().toString().equals("") ||
+                originCityTextView.getText().toString().equals("") ||
+                destinationCityTextView.getText().toString().equals("") ||
+                destinationAddressTextView.getText().toString().equals("") ||
+                rideCostTextView.getText().toString().equals("")
+        ) {return false;}
+        return true;
+    } //checkForEmptyFields
 
 } //AddRideActivity
 
