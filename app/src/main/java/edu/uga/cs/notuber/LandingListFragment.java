@@ -4,13 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.fragment.app.ListFragment;
 
 import com.google.firebase.database.DataSnapshot;
@@ -79,13 +76,14 @@ public class LandingListFragment extends ListFragment {
      */
     private void getRideListings() {
         rideListings = new ArrayList<RideListing>();
-        rideListings.add(new RideListing());
         FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myDbRef = fbDatabase.getReference("rideListings");
         myDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
+                    rideListings.clear();
+                    rideListings.add(new RideListing());
                     Log.d("Titanium", "snapshots: " + snapshot.getChildrenCount());
                     for(DataSnapshot listingSnapshot : snapshot.getChildren()) {
                         RideListing listing = listingSnapshot.getValue(RideListing.class);
@@ -109,7 +107,8 @@ public class LandingListFragment extends ListFragment {
     private void setupArrayAdapter() {
 
         // create a new ArrayAdapter for the list
-        setListAdapter( new ArrayAdapter<>( getActivity(), R.layout.list_item_for_array_adapter, rideListings ) );
+        ArrayAdapter<RideListing> myArrayAdapter = new ArrayAdapter<>(getActivity(), R.layout.list_item_for_array_adapter, rideListings);
+        setListAdapter(myArrayAdapter);
 
         // restore the saved list index selection (listing index), if available
         if(savedInstanceState != null) {
