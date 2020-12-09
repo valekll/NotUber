@@ -22,7 +22,7 @@ public class DriverMissionActivity extends AppCompatActivity {
         // Add the back button in the ActionBar of this activity.
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setDisplayHomeAsUpEnabled(false);
 
         Button confirmButton = (Button)findViewById(R.id.confirmButton);
         confirmButton.setOnClickListener(new View.OnClickListener(){
@@ -34,18 +34,4 @@ public class DriverMissionActivity extends AppCompatActivity {
         });
 
     } //onCreate()
-    /**
-     * Back button in toolbar
-     * @param item the menu item
-     * @return the item selected action
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Implement Back button listener method.
-        if(item.getItemId() == android.R.id.home ) {
-            onBackPressed();
-            return true;
-        } //if
-        return super.onOptionsItemSelected( item );
-    } //onOptionsItemSelected()
 } //DriverMissionActivity

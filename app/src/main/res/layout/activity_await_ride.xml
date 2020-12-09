@@ -8,33 +8,35 @@
 
     <TextView
         android:id="@+id/rideDetailsTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="RideId"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintVertical_bias="0.355" />
 
     <TextView
         android:id="@+id/awaitInstructionsTextView"
-        android:layout_width="wrap_content"
+        android:layout_width="250"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="Please do not exit this screen until you have arrived at your destination."
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/confirmButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rideDetailsTextView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/confirmButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:text="Arrived"
+        android:text="confirm arrival"
         android:textColor="#000000"
         app:backgroundTint="@color/mtrl_fab_bg_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
