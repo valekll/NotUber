@@ -47,14 +47,14 @@ public class LoginActivity extends AppCompatActivity {
         /////////////////////////////////////////////////////////////////////////////////
         //////////////TEMP CODE//////////////////////////////////////////////////////////
         /////////////////////////////////////////////////////////////////////////////////
-        Button bypassButton = (Button)findViewById(R.id.bypassButton);
-        bypassButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent landingIntent = new Intent(LoginActivity.this, LandingMainActivity.class);
-                startActivity(landingIntent);
-            }
-        });
+        //Button bypassButton = (Button)findViewById(R.id.bypassButton);
+        //bypassButton.setOnClickListener(new View.OnClickListener() {
+           // @Override
+            //public void onClick(View view) {
+                //Intent landingIntent = new Intent(LoginActivity.this, LandingMainActivity.class);
+                //startActivity(landingIntent);
+           // }
+       // });
         /////////////////////////////////////////////////////////////////////////////////
 
         loginButton = (Button)findViewById(R.id.loginButton);

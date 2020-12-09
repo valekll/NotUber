@@ -7,34 +7,49 @@
     tools:context=".AwaitRideActivity">
 
     <TextView
-        android:id="@+id/rideDetailsDriverTextView"
+        android:id="@+id/driverDetailsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RideId"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Waiting on a Driver..."
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/rideDetailsRiderTextView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintTop_toBottomOf="@+id/awaitInstructionsTextView" />
 
     <TextView
-        android:id="@+id/missionInstructionsTextView"
-        android:layout_width="wrap_content"
+        android:id="@+id/rideDetailsRiderTextView"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:textColor="#000000"
-        app:layout_constraintBottom_toTopOf="@+id/confirmDropOffButton"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rideDetailsDriverTextView" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.355" />
+
+    <TextView
+        android:id="@+id/awaitInstructionsTextView"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:text="Please do not exit this screen until you have arrived at your destination."
+        android:textColor="#000000"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/confirmArrivalButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/confirmDropOffButton"
+        android:id="@+id/confirmArrivalButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="50dp"
-        android:text="Arrived"
+        android:text="confirm arrival"
         android:textColor="#000000"
         app:backgroundTint="@color/mtrl_fab_bg_color_selector"
         app:layout_constraintBottom_toBottomOf="parent"
