@@ -64,8 +64,7 @@ public class LandingMainActivity extends AppCompatActivity implements Navigation
         navigationView = findViewById(R.id.nav_view);
         navMenu = navigationView.getMenu();
 
-        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference("users/" +
-                                                                                currUser.getUid());
+        DatabaseReference myDbRef = FirebaseDatabase.getInstance().getReference("users/" + currUser.getUid());
         myDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

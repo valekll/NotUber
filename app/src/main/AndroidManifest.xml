@@ -11,7 +11,8 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AwaitRideActivity"
             android:theme="@style/AppActionBarTheme"></activity>
-        <activity android:name=".DriverMissionActivity" />
+        <activity android:name=".DriverMissionActivity"
+            android:theme="@style/AppActionBarTheme"/>
         <activity android:name=".LandingMainActivity" />
         <activity
             android:name=".AddRideActivity"
