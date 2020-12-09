@@ -46,7 +46,7 @@ public class AwaitRideActivity extends AppCompatActivity {
 
         rideId = getIntent().getExtras().getString(AddRideActivity.RIDEID);
         obtainRideDetails();
-        Button confirmButton = (Button)findViewById(R.id.confirmButton);
+        confirmButton = (Button)findViewById(R.id.confirmButton);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

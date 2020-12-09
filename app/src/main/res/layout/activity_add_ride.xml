@@ -79,12 +79,6 @@
                 android:textColor="#000000"
                 app:backgroundTint="@color/mtrl_fab_bg_color_selector" />
 
-            <Button
-                android:id="@+id/bypass2Button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Button" />
-
         </LinearLayout>
     </ScrollView>
 
