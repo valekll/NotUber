@@ -66,7 +66,8 @@ public class AwaitRideActivity extends AppCompatActivity {
                     DatabaseReference listingCompletion = fbDatabase.getReference("rideListings/" +
                             myRideListing.getRideId() + "/complete");
                     listingCompletion.setValue(true);
-                    NotUberUserDatabaseUtil.adjustPoints(myRideListing.getDriverUid(), myRideListing.getRideCost());
+                    NotUberUserDatabaseUtil.adjustPoints(myRideListing.getDriverUid(),
+                            myRideListing.getRideCost());
                     Intent confirmIntent = new Intent(AwaitRideActivity.this, LandingMainActivity.class);
                     startActivity(confirmIntent);
                 } //else

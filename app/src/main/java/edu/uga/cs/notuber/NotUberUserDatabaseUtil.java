@@ -24,7 +24,7 @@ public class NotUberUserDatabaseUtil {
     public static void adjustPoints(final String uId, final int points) {
         final FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myDbRef = fbDatabase.getReference("users/" + uId);
-        myDbRef.addValueEventListener(new ValueEventListener() {
+        myDbRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
