@@ -120,7 +120,8 @@ public class AddRideActivity extends AppCompatActivity {
             DatabaseReference myDbRef = fbDatabase.getReference("rideListings/" +
                     myRideListing.getRideId());
             myDbRef.setValue(myRideListing);
-
+            NotUberUserDatabaseUtil.adjustPoints(myAuth.getCurrentUser().getUid(),
+                    (myRideListing.getRideCost() * -1));
             Intent awaitRideIntent = new Intent(this, AwaitRideActivity.class);
             awaitRideIntent.putExtra(RIDEID, myRideListing.getRideId());
             startActivity(awaitRideIntent);
