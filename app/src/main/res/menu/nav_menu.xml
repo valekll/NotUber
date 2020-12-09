@@ -4,12 +4,10 @@
 
     <item android:title="">
         <menu>
-            <item android:title="@string/my_files"></item>
-
-
+            <item android:title="My Rides"
+                android:id="@+id/myRides"></item>
             <item android:title="Log Out"
-            android:id="@+id/logout">
-
+                android:id="@+id/logout">
             </item>
         </menu>
     </item>

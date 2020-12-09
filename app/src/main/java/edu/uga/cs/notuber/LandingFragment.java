@@ -1,5 +1,6 @@
 package edu.uga.cs.notuber;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,8 +68,16 @@ public class LandingFragment extends Fragment {
         listingDetailsTextView = (TextView) fragmentView.findViewById(R.id.rideListingDetailsTextView);
         obtainRideDetails(listing);
         acceptButton = (Button) fragmentView.findViewById(R.id.acceptButton);
+        acceptButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent acceptIntent = new Intent(getActivity(),DriverMissionActivity.class);
+                startActivity(acceptIntent);
+            }
+        });
         return fragmentView;
     } //onCreateView()
+
 
     /**
      * Gets the listing index.
@@ -124,6 +133,7 @@ public class LandingFragment extends Fragment {
             } //onCancelled()
         });
     } //obtainRideDetails()
+
 
 } //LandingFragment
 
