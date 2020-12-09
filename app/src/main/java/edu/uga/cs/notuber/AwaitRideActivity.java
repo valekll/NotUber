@@ -95,7 +95,7 @@ public class AwaitRideActivity extends AppCompatActivity {
                                 listing.getDestinationCity() + "\nDriver Notes: " + listing.getDriverNotes();
                         TextView rideDetailsTextView = findViewById(R.id.rideDetailsRiderTextView);
                         rideDetailsTextView.setText(details);
-                        obtainDriverDetails();
+                        checkForRideListingUpdate();
                     } //if
                 } //if
             } //onDataChange()
@@ -108,18 +108,45 @@ public class AwaitRideActivity extends AppCompatActivity {
     } //obtainRideDetails()
 
     /**
-     * Gets the ride driver's details.
-     * @return the details
+     * Checks for an added driver in the database.
      */
-    private void obtainDriverDetails() {
+    private void checkForRideListingUpdate() {
         FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myDbRef = fbDatabase.getReference("users/" + myRideListing.getDriverUid());
+        DatabaseReference myDbRef = fbDatabase.getReference("rideListings/" + myRideListing.getRideId());
         myDbRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
-                    Log.d("Titanium", "RideListing Snapshot exists");
+                    Log.d("Arclight", "RideListing Snapshot exists");
+                    RideListing listing = snapshot.getValue(RideListing.class);
+                    if(listing != null) {
+                        obtainDriverDetails(listing.getDriverUid());
+                    } //if
+                } //if
+            } //onDataChange()
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.d("Titanium", "User data read failed.");
+            } //onCancelled()
+        });
+    } //checkForRideListingUpdate()
+
+    /**
+     * Gets the ride driver's details.
+     * @return the details
+     * @param driverUid
+     */
+    private void obtainDriverDetails(String driverUid) {
+        FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myDbRef = fbDatabase.getReference("users/" + driverUid);
+        myDbRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()) {
+                    Log.d("Arclight", "RideListing Snapshot exists");
                     driver = snapshot.getValue(NotUberUser.class);
+                    Log.d("Arclight", driver.toString());
                     if (driver != null) {
                         String details = "Driver: " + driver.getFirst() + " " + driver.getLast() +
                                 "\nPhone Number: " + driver.getPhoneNumber();

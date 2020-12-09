@@ -80,7 +80,7 @@ public class LandingFragment extends Fragment {
         acceptButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                myRideListing.setInProgess(true);
+                myRideListing.setInProgress(true);
                 myRideListing.setDriverUid(currUser.getUid());
                 FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
                 DatabaseReference listingAccepted = fbDatabase.getReference("rideListings/" +
