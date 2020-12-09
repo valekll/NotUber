@@ -1,9 +1,12 @@
 package edu.uga.cs.notuber;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -16,7 +19,7 @@ public class AwaitRideActivity extends AppCompatActivity {
     private FirebaseAuth myAuth;
     private TextView rideIdTextView;
     private String rideId;
-
+    private Button confirmButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,14 @@ public class AwaitRideActivity extends AppCompatActivity {
         //rideIdTextView = (TextView)findViewById(R.id.rideIdTextView);
         //rideIdTextView.setText(rideId);
 
-
+        Button confirmButton = (Button)findViewById(R.id.confirmButton);
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent confirmIntent = new Intent(AwaitRideActivity.this, LandingMainActivity.class);
+                startActivity(confirmIntent);
+            }
+        });
     } //onCreate()
     /**
      * Back button in toolbar
