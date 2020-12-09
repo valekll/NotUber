@@ -4,8 +4,6 @@
 
     <item android:title="">
         <menu>
-            <item android:title="My Rides"
-                android:id="@+id/myRides"></item>
             <item android:title="Log Out"
                 android:id="@+id/logout">
             </item>
