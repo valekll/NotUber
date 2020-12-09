@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
@@ -17,7 +16,7 @@ public class AwaitRideActivity extends AppCompatActivity {
     private FirebaseAuth myAuth;
     private TextView rideIdTextView;
     private String rideId;
-    private Button requestRideButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
