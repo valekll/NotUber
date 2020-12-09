@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -26,6 +27,7 @@ public class AwaitRideActivity extends AppCompatActivity {
     private FirebaseAuth myAuth;
 
     private RideListing myRideListing;
+    private NotUberUser driver;
 
     private String rideId;
 
@@ -48,8 +50,29 @@ public class AwaitRideActivity extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent confirmIntent = new Intent(AwaitRideActivity.this, LandingMainActivity.class);
-                startActivity(confirmIntent);
+                if(driver == null) {
+                    //make toast
+                    Toast myMessage = Toast.makeText(AwaitRideActivity.this,
+                            "Please wait for a driver.", Toast.LENGTH_SHORT);
+                    //set toast colors to be more visible
+                    View messageView = myMessage.getView();
+                    messageView.setBackgroundColor(Color.GRAY);
+                    TextView messageTextView = (TextView)myMessage.getView()
+                            .findViewById(android.R.id.message);
+                    messageTextView.setTextColor(Color.WHITE);
+                    myMessage.show();
+                } //if
+                else {
+                    FirebaseDatabase fbDatabase = FirebaseDatabase.getInstance();
+                    DatabaseReference listingCompletion = fbDatabase.getReference("rideListings/" +
+                            myRideListing.getRideId() + "/complete");
+                    listingCompletion.setValue(true);
+                    DatabaseReference giveDriverCompensation = fbDatabase.getReference("users/" +
+                            myRideListing.getDriverUid() + "/ridePoints");
+                    giveDriverCompensation.setValue(driver.getRidePoints() + myRideListing.getRideCost());
+                    Intent confirmIntent = new Intent(AwaitRideActivity.this, LandingMainActivity.class);
+                    startActivity(confirmIntent);
+                } //else
             } //onClick()
         });
     } //onCreate()
@@ -98,7 +121,7 @@ public class AwaitRideActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()) {
                     Log.d("Titanium", "RideListing Snapshot exists");
-                    NotUberUser driver = snapshot.getValue(NotUberUser.class);
+                    driver = snapshot.getValue(NotUberUser.class);
                     if (driver != null) {
                         String details = "Driver: " + driver.getFirst() + " " + driver.getLast() +
                                 "\nPhone Number: " + driver.getPhoneNumber();
@@ -114,5 +137,5 @@ public class AwaitRideActivity extends AppCompatActivity {
             } //onCancelled()
         });
     } //obtainRideDetails()
-    
+
 } //AwaitRideActivity
