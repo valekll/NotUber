@@ -1,2 +1,2 @@
 # NotUber
-A ride sharing app
+A ride sharing android application. This application uses Google's firebase for the database.
